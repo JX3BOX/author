@@ -73,8 +73,7 @@ export default {
             return {
                 user_id: this.uid,
                 page: this.page,
-                limit: this.per,
-                clear_client: 1,
+                per: this.per,
             };
         },
         uid: function () {
@@ -89,7 +88,7 @@ export default {
             this.loading = true;
             getWikis(this.params)
                 .then((res) => {
-                    this.list = res.data.data.data;
+                    this.list = res.data.data.list;
                     this.total = res.data.data.total;
                 })
                 .finally(() => {
