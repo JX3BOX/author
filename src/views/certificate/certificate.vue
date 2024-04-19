@@ -1,8 +1,13 @@
 <template>
     <AppLayout>
         <div class="m-main">
+            <div class="u-title m-hide">第一届证书</div>
+            <div class="u-time m-hide">获得时间：2019-10-10</div>
+            <el-image class="u-img" :fit="'contain'" :src="collectionImg" :preview-src-list="[collectionImg]">
+            </el-image>
+            <button @click="print" class="u-btn m-hide el-button el-button--primary">打印证书</button>
+
             <canvas id="canvas" ref="canvas"></canvas>
-            <button @click="print" class="u-btn el-button el-button--primary">打印证书</button>
         </div>
     </AppLayout>
 </template>
@@ -18,6 +23,9 @@ export default {
     data: function () {
         return {
             drawConfig: {},
+            drawCtx: {},
+            collectionImg: "",
+            exportImgTime: "",
         };
     },
     computed: {},
@@ -33,26 +41,29 @@ export default {
         draw() {
             const canvas = document.getElementById("canvas");
             const ctx = canvas.getContext("2d");
+            this.drawCtx = ctx;
             this.loadDrawImage(this.drawConfig.key, "bg").then((img) => {
                 const targetWidth = 1280; // 目标宽度
                 const aspectRatio = img.width / img.height;
                 const targetHeight = targetWidth / aspectRatio;
                 this.$refs.canvas.width = targetWidth;
                 this.$refs.canvas.height = targetHeight;
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                for (const key in this.drawConfig.element) {
-                    let item = this.drawConfig.element[key];
-                    if (item.style) {
-                        if (item.type == "text") {
-                            item.key = key;
-                            this.drawText(ctx, item);
-                        } else if (item.type == "rank") {
-                            this.drawRank(ctx, item);
-                        } else if (item.type == "qr") {
-                            this.drawQr(ctx, item);
+                this.$nextTick(() => {
+                    this.drawImg(img, 0, 0, canvas.width, canvas.height);
+                    for (const key in this.drawConfig.element) {
+                        let item = this.drawConfig.element[key];
+                        if (item.style) {
+                            if (item.type == "text") {
+                                item.key = key;
+                                this.drawText(ctx, item);
+                            } else if (item.type == "rank") {
+                                this.drawRank(ctx, item);
+                            } else if (item.type == "qr") {
+                                this.drawQr(ctx, item);
+                            }
                         }
                     }
-                }
+                });
             });
         },
         drawText(ctx, data) {
@@ -117,15 +128,9 @@ export default {
                     const aspectRatio = img.width / img.height;
                     const targetHeight = targetWidth / aspectRatio;
                     if (data.style.type == "center") {
-                        ctx.drawImage(
-                            img,
-                            data.style.left - targetWidth / 2,
-                            data.style.top,
-                            targetWidth,
-                            targetHeight
-                        );
+                        this.drawImg(img, data.style.left - targetWidth / 2, data.style.top, targetWidth, targetHeight);
                     } else if (data.style.type == "left") {
-                        ctx.drawImage(img, data.style.left, data.style.top, targetWidth, targetHeight);
+                        this.drawImg(img, data.style.left, data.style.top, targetWidth, targetHeight);
                     }
                 });
             } else if (imgType == 2) {
@@ -134,7 +139,7 @@ export default {
                     const aspectRatio = img.width / img.height;
                     const targetHeight = targetWidth / aspectRatio;
                     if (data.style.type == "center") {
-                        ctx.drawImage(
+                        this.drawImg(
                             img,
                             data.style.left - targetWidth * 1.5 - data.style.spaceWidth,
                             data.style.top,
@@ -142,7 +147,7 @@ export default {
                             targetHeight
                         );
                     } else if (data.style.type == "left") {
-                        ctx.drawImage(img, data.style.left, data.style.top, targetWidth, targetHeight);
+                        this.drawImg(img, data.style.left, data.style.top, targetWidth, targetHeight);
                     }
                 });
                 this.loadDrawImage("after").then((img) => {
@@ -150,7 +155,7 @@ export default {
                     const aspectRatio = img.width / img.height;
                     const targetHeight = targetWidth / aspectRatio;
                     if (data.style.type == "center") {
-                        ctx.drawImage(
+                        this.drawImg(
                             img,
                             data.style.left + targetWidth / 2 + data.style.spaceWidth,
                             data.style.top,
@@ -158,7 +163,7 @@ export default {
                             targetHeight
                         );
                     } else if (data.style.type == "left") {
-                        ctx.drawImage(
+                        this.drawImg(
                             img,
                             data.style.left + targetWidth * 2 + data.style.spaceWidth * 2,
                             data.style.top,
@@ -172,15 +177,9 @@ export default {
                     const aspectRatio = img.width / img.height;
                     const targetHeight = targetWidth / aspectRatio;
                     if (data.style.type == "center") {
-                        ctx.drawImage(
-                            img,
-                            data.style.left - targetWidth / 2,
-                            data.style.top,
-                            targetWidth,
-                            targetHeight
-                        );
+                        this.drawImg(img, data.style.left - targetWidth / 2, data.style.top, targetWidth, targetHeight);
                     } else if (data.style.type == "left") {
-                        ctx.drawImage(
+                        this.drawImg(
                             img,
                             data.style.left + targetWidth + data.style.spaceWidth,
                             data.style.top,
@@ -195,7 +194,7 @@ export default {
                     const aspectRatio = img.width / img.height;
                     const targetHeight = targetWidth / aspectRatio;
                     if (data.style.type == "center") {
-                        ctx.drawImage(
+                        this.drawImg(
                             img,
                             data.style.left - targetWidth * 2 - data.style.spaceWidth,
                             data.style.top,
@@ -203,7 +202,7 @@ export default {
                             targetHeight
                         );
                     } else if (data.style.type == "left") {
-                        ctx.drawImage(img, data.style.left, data.style.top, targetWidth, targetHeight);
+                        this.drawImg(img, data.style.left, data.style.top, targetWidth, targetHeight);
                     }
                 });
                 this.loadDrawImage("after").then((img) => {
@@ -211,7 +210,7 @@ export default {
                     const aspectRatio = img.width / img.height;
                     const targetHeight = targetWidth / aspectRatio;
                     if (data.style.type == "center") {
-                        ctx.drawImage(
+                        this.drawImg(
                             img,
                             data.style.left + targetWidth + data.style.spaceWidth,
                             data.style.top,
@@ -219,7 +218,7 @@ export default {
                             targetHeight
                         );
                     } else if (data.style.type == "left") {
-                        ctx.drawImage(
+                        this.drawImg(
                             img,
                             data.style.left + targetWidth * 3 + data.style.spaceWidth * 3,
                             data.style.top,
@@ -234,7 +233,7 @@ export default {
                         const aspectRatio = img.width / img.height;
                         const targetHeight = targetWidth / aspectRatio;
                         if (data.style.type == "center") {
-                            ctx.drawImage(
+                            this.drawImg(
                                 img,
                                 data.style.left -
                                     targetWidth -
@@ -245,7 +244,7 @@ export default {
                                 targetHeight
                             );
                         } else if (data.style.type == "left") {
-                            ctx.drawImage(
+                            this.drawImg(
                                 img,
                                 data.style.left +
                                     targetWidth +
@@ -272,8 +271,12 @@ export default {
         },
         drawQr(ctx, data) {
             this.loadDrawImage(null, "qr").then((img) => {
-                ctx.drawImage(img, 150, 1490, 100, 100);
+                this.drawImg(img, 150, 1490, 100, 100);
             });
+        },
+        drawImg(img, left, top, width, height) {
+            this.drawCtx.drawImage(img, left, top, width, height);
+            this.canvasExport();
         },
         getImgPath(id, type) {
             let imgUrl = "";
@@ -286,6 +289,14 @@ export default {
             }
             return __imgPath + imgUrl;
         },
+        canvasExport() {
+            clearTimeout(this.exportImgTime);
+            const canvas = document.getElementById("canvas");
+            this.exportImgTime = setTimeout(() => {
+                console.log(1);
+                this.collectionImg = canvas.toDataURL("image/png");
+            }, 100);
+        },
         print() {
             window.print();
         },
@@ -295,16 +306,49 @@ export default {
 
 <style lang="less" scoped>
 .m-main {
+    &::after {
+        content: "";
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #24292e;
+        z-index: -1;
+    }
     .mt(@header-height);
     .pt(50px);
-    .pb(100px);
+    .pb(50px);
+    .x();
+    .u-title {
+        .fz(28px);
+        .bold();
+        .color(#ffffff);
+    }
+    .u-time {
+        .mt(10px);
+        .fz(14px);
+        .color(#999999);
+    }
+    .u-img {
+        .db();
+        .w(400px);
+        .pointer();
+        margin: 0 auto;
+        .mt(10px);
+        box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.1);
+        .r(5px);
+    }
     #canvas {
         display: block;
-        margin: 0 auto;
+        position: fixed;
+        left: 0;
+        right: 0;
+        transform: translateX(-110%) translateY(-110%);
     }
     .u-btn {
         .db();
-        width: 200px;
+        .w(200px);
         margin: 0 auto;
         .mt(50px);
     }
@@ -316,9 +360,12 @@ export default {
     .m-main {
         margin: 0;
         padding: 0;
+        &::after {
+            .none();
+        }
     }
-    .u-btn {
-        .none();
+    .m-hide {
+        .none() !important;
     }
 }
 </style>
