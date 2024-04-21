@@ -15,7 +15,7 @@
 <script>
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import AppLayout from "@/layouts/AppLayout.vue";
-import CI from "./collection.json";
+import { getCertification } from "@/service/cms";
 export default {
     name: "Author",
     components: { AppLayout },
@@ -31,18 +31,24 @@ export default {
     computed: {},
     created: function () {},
     mounted() {
-        this.drawConfig = CI[this.$route.params.cid];
+        this.drawConfig = 1;
         this.Init();
+        this.load()
     },
     methods: {
         Init() {
             this.draw();
         },
+        load() {
+            getCertification(6557).then((res) => {
+                console.log(res);
+            }); 
+        },
         draw() {
             const canvas = document.getElementById("canvas");
             const ctx = canvas.getContext("2d");
             this.drawCtx = ctx;
-            this.loadDrawImage(this.drawConfig.key, "bg").then((img) => {
+            this.loadDrawImage(1, "bg").then((img) => {
                 const targetWidth = 1280; // 目标宽度
                 const aspectRatio = img.width / img.height;
                 const targetHeight = targetWidth / aspectRatio;
