@@ -1,11 +1,13 @@
 <template>
     <AppLayout>
         <div class="m-main">
-            <div class="u-title m-hide">第一届证书</div>
-            <div class="u-time m-hide">获得时间：2019-10-10</div>
-            <el-image class="u-img" :fit="'contain'" :src="collectionImg" :preview-src-list="[collectionImg]">
-            </el-image>
-            <button @click="print" class="u-btn m-hide el-button el-button--primary">打印证书</button>
+            <template v-if="collectionInfo.team_certificate">
+                <div class="u-title m-hide">{{ collectionInfo.team_certificate.rank_name }}</div>
+                <div class="u-time m-hide">获得时间：{{ collectionInfo.team_certificate.awardtime }}</div>
+                <el-image class="u-img" :fit="'contain'" :src="collectionImg" :preview-src-list="[collectionImg]">
+                </el-image>
+                <button @click="print" class="u-btn m-hide el-button el-button--primary">打印证书</button>
+            </template>
 
             <canvas id="canvas" ref="canvas"></canvas>
         </div>
@@ -16,6 +18,7 @@
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import AppLayout from "@/layouts/AppLayout.vue";
 import { getCertification } from "@/service/cms";
+import CI from "@/assets/data/collection.json";
 export default {
     name: "Author",
     components: { AppLayout },
@@ -26,6 +29,7 @@ export default {
             drawCtx: {},
             collectionImg: "",
             exportImgTime: "",
+            collectionInfo: false,
         };
     },
     computed: {},
@@ -33,22 +37,64 @@ export default {
     mounted() {
         this.drawConfig = 1;
         this.Init();
-        this.load()
+        this.load();
     },
     methods: {
-        Init() {
-            this.draw();
-        },
+        Init() {},
         load() {
-            getCertification(6557).then((res) => {
-                console.log(res);
-            }); 
+            getCertification(this.$route.params.id)
+                .then((res) => {
+                    this.collectionInfo = res.data.data;
+                    const { team_certificate } = res.data.data;
+                    let {
+                        rank_id,
+                        time,
+                        team_name,
+                        sort_no,
+                        teammate,
+                        awardtime,
+                        leader,
+                        duration,
+                        team_server,
+                        rank_name,
+                    } = team_certificate;
+                    let drawConfig = CI[rank_id];
+                    let { element } = drawConfig;
+
+                    element.mapTime.content = this.formatTimeString(element.mapTime.content, time);
+                    element.name.content = team_name;
+                    element.rank.content = sort_no;
+                    element.team.content = teammate;
+                    if (element.colonel) {
+                        element.colonel.content = `团长：${leader}`;
+                    }
+                    if (element.signTime) {
+                        element.signTime.content = this.formatTimeString(element.signTime.content, awardtime);
+                    }
+                    if (element.time) {
+                        element.time.content = this.takeTimeCalc(element.time.content, duration);
+                    }
+                    if (element.server) {
+                        element.server.content = team_server;
+                    }
+                    if (element.qrSubTitle) {
+                        element.qrSubTitle.content = rank_name;
+                    } else if (element.mapName) {
+                        element.mapName.content = `副本名称：${rank_name}`;
+                    }
+                    this.drawConfig = drawConfig;
+                    this.draw();
+                })
+                .catch((err) => {
+                    console.log(err);
+                    window.location.href = "/dashboard";
+                });
         },
         draw() {
             const canvas = document.getElementById("canvas");
             const ctx = canvas.getContext("2d");
             this.drawCtx = ctx;
-            this.loadDrawImage(1, "bg").then((img) => {
+            this.loadDrawImage(this.drawConfig.key, "bg").then((img) => {
                 const targetWidth = 1280; // 目标宽度
                 const aspectRatio = img.width / img.height;
                 const targetHeight = targetWidth / aspectRatio;
@@ -63,7 +109,7 @@ export default {
                                 item.key = key;
                                 this.drawText(ctx, item);
                             } else if (item.type == "rank") {
-                                this.drawRank(ctx, item);
+                                this.drawRank(item);
                             } else if (item.type == "qr") {
                                 this.drawQr(ctx, item);
                             }
@@ -84,26 +130,30 @@ export default {
             }
         },
         drawWrappedText(ctx, text, style) {
-            let words = text.split(style.split);
+            let words = text.split(";");
             let line = "";
             for (let i = 0; i < words.length; i++) {
-                let testLine = line + words[i];
+                let name = words[i].split(",")[0];
+                if (this.drawConfig.element.colonel) {
+                    if (name == this.collectionInfo.team_certificate.leader) {
+                        continue;
+                    }
+                }
+                let testLine = line + name;
                 let metrics = ctx.measureText(testLine);
                 let testWidth = metrics.width;
                 if (testWidth > style.width && i > 0) {
                     ctx.fillText(line, style.left, style.top);
-                    line = words[i];
+                    line = name += "，";
                     style.top += style.height;
                 } else {
-                    if (i < words.length - 1) {
-                        testLine += style.split;
-                    }
+                    testLine += "，";
                     line = testLine;
                 }
             }
             ctx.fillText(line, style.left, style.top);
         },
-        drawRank(ctx, data) {
+        drawRank(data) {
             let imgType = 1;
             let rankSrc = "";
             let numArray = [];
@@ -291,7 +341,7 @@ export default {
             } else if (type == "rank") {
                 imgUrl = `img/dashboard/collection/${this.drawConfig.key}/rank/${id}.png`;
             } else if (type == "qr") {
-                imgUrl = `img/dashboard/collection/${this.$route.params.cid}/qr.png`;
+                imgUrl = `img/dashboard/collection/${this.collectionInfo.team_certificate.rank_id}/qr.png`;
             }
             return __imgPath + imgUrl;
         },
@@ -299,9 +349,32 @@ export default {
             clearTimeout(this.exportImgTime);
             const canvas = document.getElementById("canvas");
             this.exportImgTime = setTimeout(() => {
-                console.log(1);
                 this.collectionImg = canvas.toDataURL("image/png");
             }, 100);
+        },
+        takeTimeCalc(timeString, seconds) {
+            let hours = Math.floor(seconds / 3600);
+            let minutes = Math.floor((seconds % 3600) / 60);
+            let remainingSeconds = seconds % 60;
+            timeString = timeString.replace(/hh/, hours).replace(/mm/, minutes).replace(/ss/, remainingSeconds);
+            return timeString;
+        },
+        formatTimeString(timeString, dateTimeString) {
+            const date = new Date(dateTimeString);
+            const year = date.getFullYear();
+            const month = (date.getMonth() + 1).toString().padStart(2, "0");
+            const day = date.getDate().toString().padStart(2, "0");
+            const hours = date.getHours().toString().padStart(2, "0");
+            const minutes = date.getMinutes().toString().padStart(2, "0");
+            const seconds = date.getSeconds().toString().padStart(2, "0");
+            timeString = timeString
+                .replace(/yyyy/, year)
+                .replace(/MM/, month)
+                .replace(/dd/, day)
+                .replace(/hh/, hours)
+                .replace(/mm/, minutes)
+                .replace(/ss/, seconds);
+            return timeString;
         },
         print() {
             window.print();
