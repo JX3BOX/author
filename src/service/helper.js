@@ -9,24 +9,12 @@ function getNamespaces(params) {
     return $cms().get(`/api/cms/namespace`, { params });
 }
 
-function getPlans(params) {
-    return $helper()({
-        method: "GET",
-        url: `/api/item_plans`,
-        params: params,
-    });
-}
-
 function getWikis(params) {
-    return $helper()({
-        method: "GET",
-        url: `/api/wiki/posts`,
-        params: params,
-    });
+    return $cms().get(`/api/cms/wiki/post`, { params });
 }
 
 function muteUser(uid, params) {
     return $helper().put(`/api/user/${uid}/mute`, params);
 }
 
-export { $helper, getCollections, getNamespaces, getPlans, getWikis, muteUser };
+export { $helper, getCollections, getNamespaces, getWikis, muteUser };
