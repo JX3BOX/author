@@ -1,5 +1,5 @@
-import { $cms } from "@jx3box/jx3box-common/js/https";
-import axios from 'axios'
+import { $cms, $team } from "@jx3box/jx3box-common/js/https";
+import axios from "axios";
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 
 function getPosts(params) {
@@ -11,48 +11,48 @@ function getPosts(params) {
 function getUserInfo(uid) {
     return $cms().get(`/api/cms/user/${uid}/info`, {
         params: {
-            nocache: 1
-        }
+            nocache: 1,
+        },
     });
 }
 
 function getSuperAuthor(uid) {
-    return $cms().get('/api/cms/user/is_super_author/' + uid)
+    return $cms().get("/api/cms/user/is_super_author/" + uid);
 }
 
 function getIdentity(uid) {
-    return $cms().get(`/api/cms/user/${uid}/identity`)
+    return $cms().get(`/api/cms/user/${uid}/identity`);
 }
 
 function getUserPz(params) {
     return $cms().get(`/api/cms/app/pz`, {
-        params: params
-    })
+        params: params,
+    });
 }
 
 // 获取用户的骚话
 function getUserJokes(params) {
     return $cms().get(`/api/cms/post/jokes`, {
-        params
-    })
+        params,
+    });
 }
 
 // 获取用户的趣图
 function getUserEmotions(params) {
     return $cms().get(`/api/cms/post/emotions`, {
-        params
-    })
+        params,
+    });
 }
 //获取装扮
 function getDecoration(params) {
     return $cms().get(`/api/cms/user/decoration`, {
-        params
+        params,
     });
 }
 
 function getDecorationJson() {
-    let url = __imgPath + `decoration/index.json?${Date.now()}}`
-    return axios.get(url)
+    let url = __imgPath + `decoration/index.json?${Date.now()}}`;
+    return axios.get(url);
 }
 
 function getHonorJson() {
@@ -60,10 +60,14 @@ function getHonorJson() {
     return axios.get(url);
 }
 
-function getDBM(params){
+function getDBM(params) {
     return $cms().get(`/api/cms/dbm/pkg`, {
-        params
+        params,
     });
+}
+
+function getCertification(id) {
+    return $team().get(`/api/team/team-certification-record/item/${id}`);
 }
 
 export {
@@ -77,5 +81,6 @@ export {
     getDecoration,
     getDecorationJson,
     getHonorJson,
-    getDBM
+    getDBM,
+    getCertification,
 };
