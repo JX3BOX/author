@@ -32,17 +32,22 @@ export default {
             collectionInfo: false,
         };
     },
-    computed: {},
-    created: function () {},
-    mounted() {
-        this.drawConfig = 1;
-        this.Init();
-        this.load();
+    computed: {
+        id() {
+            return this.$route.params.id;
+        },
+    },
+    watch: {
+        id: {
+            immediate: true,
+            handler: function (val) {
+                val ? this.load() : this.$router.push({ name: "index" });
+            },
+        },
     },
     methods: {
-        Init() {},
         load() {
-            getCertification(this.$route.params.id)
+            getCertification(this.id)
                 .then((res) => {
                     this.collectionInfo = res.data.data;
                     const { team_certificate } = res.data.data;
@@ -87,7 +92,7 @@ export default {
                 })
                 .catch((err) => {
                     console.log(err);
-                    window.location.href = "/dashboard";
+                    this.$router.push({ name: "index" });
                 });
         },
         draw() {
