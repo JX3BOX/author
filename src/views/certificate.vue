@@ -447,6 +447,11 @@ export default {
         &::after {
             .none();
         }
+
+        .u-img{
+            .w(auto);
+            margin:0;
+        }
     }
     .m-hide {
         .none() !important;
