@@ -1,10 +1,10 @@
 <template>
     <AppLayout>
         <div class="m-main">
-            <template v-if="collectionInfo.team_certificate">
-                <div class="u-title m-hide">{{ collectionInfo.team_certificate.rank_name }}</div>
-                <div class="u-time m-hide">获得时间：{{ collectionInfo.team_certificate.awardtime }}</div>
-                <el-image class="u-img" :fit="'contain'" :src="collectionImg" :preview-src-list="[collectionImg]">
+            <template v-if="treasureInfo.team_certificate">
+                <div class="u-title m-hide">{{ treasureInfo.team_certificate.rank_name }}</div>
+                <div class="u-time m-hide">获得时间：{{ treasureInfo.team_certificate.awardtime }}</div>
+                <el-image class="u-img" :fit="'contain'" :src="treasureImg" :preview-src-list="[treasureImg]">
                 </el-image>
                 <button @click="print" class="u-btn m-hide el-button el-button--primary">打印证书</button>
             </template>
@@ -18,7 +18,7 @@
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import AppLayout from "@/layouts/AppLayout.vue";
 import { getCertification } from "@/service/cms";
-import CI from "@/assets/data/collection.json";
+import CI from "@/assets/data/certificate.json";
 export default {
     name: "Author",
     components: { AppLayout },
@@ -27,9 +27,9 @@ export default {
         return {
             drawConfig: {},
             drawCtx: {},
-            collectionImg: "",
+            treasureImg: "",
             exportImgTime: "",
-            collectionInfo: false,
+            treasureInfo: false,
         };
     },
     computed: {
@@ -49,7 +49,7 @@ export default {
         load() {
             getCertification(this.id)
                 .then((res) => {
-                    this.collectionInfo = res.data.data;
+                    this.treasureInfo = res.data.data;
                     const { team_certificate } = res.data.data;
                     let {
                         rank_id,
@@ -140,7 +140,7 @@ export default {
             for (let i = 0; i < words.length; i++) {
                 let name = words[i].split(",")[0];
                 if (this.drawConfig.element.colonel) {
-                    if (name == this.collectionInfo.team_certificate.leader) {
+                    if (name == this.treasureInfo.team_certificate.leader) {
                         continue;
                     }
                 }
@@ -342,11 +342,11 @@ export default {
         getImgPath(id, type) {
             let imgUrl = "";
             if (type == "bg") {
-                imgUrl = `img/dashboard/collection/${id}/background.png`;
+                imgUrl = `img/dashboard/treasure/${id}/background.png`;
             } else if (type == "rank") {
-                imgUrl = `img/dashboard/collection/${this.drawConfig.key}/rank/${id}.png`;
+                imgUrl = `img/dashboard/treasure/${this.drawConfig.key}/rank/${id}.png`;
             } else if (type == "qr") {
-                imgUrl = `img/dashboard/collection/${this.collectionInfo.team_certificate.rank_id}/qr.png`;
+                imgUrl = `img/dashboard/treasure/${this.treasureInfo.team_certificate.rank_id}/qr.png`;
             }
             return __imgPath + imgUrl;
         },
@@ -354,7 +354,7 @@ export default {
             clearTimeout(this.exportImgTime);
             const canvas = document.getElementById("canvas");
             this.exportImgTime = setTimeout(() => {
-                this.collectionImg = canvas.toDataURL("image/png");
+                this.treasureImg = canvas.toDataURL("image/png");
             }, 100);
         },
         takeTimeCalc(timeString, seconds) {
