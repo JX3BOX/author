@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 import AppLayout from "@/layouts/AppLayout.vue";
 import { getCertification } from "@/service/cms";
 import CI from "@/assets/data/certificate.json";
@@ -342,13 +342,13 @@ export default {
         getImgPath(id, type) {
             let imgUrl = "";
             if (type == "bg") {
-                imgUrl = `img/dashboard/treasure/${id}/background.png`;
+                imgUrl = `${__cdn}/design/certification/CertBG_jdt${id < 10 ? "0" + id : id}.png`;
             } else if (type == "rank") {
-                imgUrl = `img/dashboard/treasure/${this.drawConfig.key}/rank/${id}.png`;
+                imgUrl = require(`../assets/img/cert/${this.drawConfig.key}/rank/${id}.png`);
             } else if (type == "qr") {
-                imgUrl = `img/dashboard/treasure/${this.treasureInfo.team_certificate.rank_id}/qr.png`;
+                imgUrl = require(`../assets/img/cert/${this.treasureInfo.team_certificate.rank_id}/qr.png`);
             }
-            return __imgPath + imgUrl;
+            return imgUrl;
         },
         canvasExport() {
             clearTimeout(this.exportImgTime);
@@ -448,9 +448,9 @@ export default {
             .none();
         }
 
-        .u-img{
+        .u-img {
             .w(auto);
-            margin:0;
+            margin: 0;
         }
     }
     .m-hide {
