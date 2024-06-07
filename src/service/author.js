@@ -34,7 +34,7 @@ function getUserPublicTeams(uid) {
  * @param {*} userId 用户id
  */
 function deny(userId) {
-    return $next().post(`/api/my-userlist/deny/${userId}`)
+    return $next().post(`/api/my-userlist/deny/${userId}`);
 }
 
 /**
@@ -42,7 +42,7 @@ function deny(userId) {
  * @param {*} userId 用户id
  */
 function undeny(userId) {
-    return $next().delete(`/api/my-userlist/deny/${userId}`)
+    return $next().delete(`/api/my-userlist/deny/${userId}`);
 }
 /**
  * 获取黑名单列表
@@ -55,7 +55,7 @@ function undeny(userId) {
  */
 function getBlackList(params) {
     return $next().get("/api/my-userlist/deny", {
-        params
+        params,
     });
 }
 
@@ -64,9 +64,29 @@ function getBlackList(params) {
  * pageIndex  user_id
  */
 function getBattleList(params) {
-    return $team({ mute: true })
-        .get(`/api/team/battle/public-list`, {
-            params,
-        })
+    return $team({ mute: true }).get(`/api/team/battle/public-list`, {
+        params,
+    });
 }
-export { getDouyu, getUserMedals, getFrames, getUserPublicTeams, deny, undeny, getBlackList, getBattleList };
+
+/**
+ * 获取公开的讨论主题帖列表
+ *
+ */
+function getTopicList(params) {
+    return $team({ mute: true }).get(`/api/next2/community/discussion/topic/list`, {
+        params,
+    });
+}
+
+export {
+    getDouyu,
+    getUserMedals,
+    getFrames,
+    getUserPublicTeams,
+    deny,
+    undeny,
+    getBlackList,
+    getBattleList,
+    getTopicList,
+};

@@ -19,6 +19,9 @@ import Collection from "@/components/Collection";
 // import Question from "@/components/Question.vue";
 // import Paper from "@/components/Paper.vue";
 import Namespace from "../Namespace.vue";
+import Emotions from "@/components/Emotions";
+import Jokes from "@/components/Jokes";
+import Topic from "@/components/Topic";
 export default {
     name: "Other",
     components: {
@@ -26,11 +29,20 @@ export default {
         Namespace,
         // Question,
         // Paper,
+        Emotions,
+        Jokes,
+        Topic,
     },
     data: function () {
         return {
-            active: "Collection",
+            active: "Topic",
             types: [
+                {
+                    label: "帖子",
+                    value: "Topic",
+                    component: Topic,
+                    icon: "el-icon-collection",
+                },
                 {
                     label: "小册",
                     value: "Collection",
@@ -52,6 +64,18 @@ export default {
                     value: "Namespace",
                     component: Namespace,
                     icon: "el-icon-pear",
+                },
+                {
+                    label: "趣图",
+                    value: "Emotions",
+                    component: Emotions,
+                    icon: "el-icon-cherry",
+                },
+                {
+                    label: "骚话",
+                    value: "Jokes",
+                    component: Jokes,
+                    icon: "el-icon-apple",
                 },
             ],
         };

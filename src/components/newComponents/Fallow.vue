@@ -16,8 +16,6 @@
 </template>
 
 <script>
-import Emotions from "@/components/Emotions";
-import Jokes from "@/components/Jokes";
 import Face from "@/components/newComponents/Face";
 import Paper from "@/components/Paper.vue";
 import Question from "@/components/Question.vue";
@@ -26,8 +24,6 @@ import Body from "@/components/newComponents/Body.vue";
 export default {
     name: "Fallow",
     components: {
-        Emotions,
-        Jokes,
         Face,
         Paper,
         Question,
@@ -48,18 +44,6 @@ export default {
                     value: "Body",
                     component: Body,
                     icon:'el-icon-watermelon'
-                },
-                {
-                    label: "趣图",
-                    value: "Emotions",
-                    component: Emotions,
-                    icon : 'el-icon-cherry'
-                },
-                {
-                    label: "骚话",
-                    value: "Jokes",
-                    component: Jokes,
-                    icon : 'el-icon-apple'
                 },
                 {
                     label: "试卷",
