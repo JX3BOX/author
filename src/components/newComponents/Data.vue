@@ -42,7 +42,7 @@ export default {
                     icon: "el-icon-ice-cream",
                 },
                 {
-                    label: "数据",
+                    label: "插件",
                     value: "DBM",
                     component: DBM,
                     icon: "el-icon-cold-drink",
