@@ -26,8 +26,8 @@
 
         <el-pagination
             class="m-author-pages"
-            background
             :hide-on-single-page="true"
+            background
             layout="prev, pager, next"
             :total="total"
             :current-page.sync="page"
