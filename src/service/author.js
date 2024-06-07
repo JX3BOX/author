@@ -74,7 +74,7 @@ function getBattleList(params) {
  *
  */
 function getTopicList(params) {
-    return $team({ mute: true }).get(`/api/next2/community/discussion/topic/list`, {
+    return $next().get(`/api/next2/community/discussion/topic/list`, {
         params,
     });
 }
