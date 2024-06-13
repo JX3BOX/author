@@ -4,11 +4,23 @@
         <div v-if="list && list.length" class="m-archive-list">
             <ul class="u-list">
                 <li v-for="(item, i) in list" :key="i + item" class="u-item">
+                    <!-- Banner -->
+                    <a class="u-banner" :href="postLink(item.post_type, item.ID, item.client)" target="_blank">
+                        <img :src="getBanner(item)" :key="item.ID" />
+                    </a>
+
                     <!-- 标题 -->
                     <h2 class="u-jokes">
                         <!-- 标题文字 -->
-                        <a :href="postLink(item.id)" class="u-title" target="_blank">{{ item.title || "无标题" }}</a>
+                        <a :href="postLink(item.id)" class="u-title" target="_blank"
+                            >【{{ item.category }}】{{ item.title || "无标题" }}</a
+                        >
                     </h2>
+
+                    <!-- 字段 -->
+                    <div class="u-content u-desc">
+                        {{ item.introduction || "无介绍" }}
+                    </div>
 
                     <!-- 作者 -->
                     <div class="u-misc">
@@ -38,8 +50,10 @@
 </template>
 
 <script>
-import { getLink } from "@jx3box/jx3box-common/js/utils";
+import { getLink, showBanner } from "@jx3box/jx3box-common/js/utils";
 import dayjs from "dayjs";
+import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
+import { random } from "lodash";
 import { getTopicList } from "@/service/author.js";
 export default {
     props: [],
@@ -81,6 +95,15 @@ export default {
         },
         dateFormat: function (val) {
             return dayjs(val).format("YYYY-MM-DD HH:mm:ss");
+        },
+        getBanner: function (item) {
+            if (item.banner_img) {
+                return showBanner(item.banner_img);
+            } else {
+                // 从1-39中随机选一个
+                const randomNum = random(1, 39);
+                return __cdn + `design/random_cover/${randomNum}.jpg`;
+            }
         },
     },
     watch: {
