@@ -10,7 +10,7 @@
                     </a>
 
                     <!-- 标题 -->
-                    <h2 class="u-jokes">
+                    <h2 class="u-post">
                         <!-- 标题文字 -->
                         <a :href="postLink(item.id)" class="u-title" target="_blank"
                             >【{{ item.category }}】{{ item.title || "无标题" }}</a
@@ -19,7 +19,7 @@
 
                     <!-- 字段 -->
                     <div class="u-content u-desc">
-                        {{ item.introduction || "无介绍" }}
+                        {{ item.introduction || "" }}
                     </div>
 
                     <!-- 作者 -->
