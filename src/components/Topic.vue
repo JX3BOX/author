@@ -5,8 +5,8 @@
             <ul class="u-list">
                 <li v-for="(item, i) in list" :key="i + item" class="u-item">
                     <!-- Banner -->
-                    <a class="u-banner" :href="postLink(item.post_type, item.ID, item.client)" target="_blank">
-                        <img :src="getBanner(item)" :key="item.ID" />
+                    <a class="u-banner" :href="postLink(item.id)" target="_blank">
+                        <img :src="getBanner(item)" :key="item.id" />
                     </a>
 
                     <!-- 标题 -->
