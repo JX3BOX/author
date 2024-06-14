@@ -79,6 +79,12 @@ function getTopicList(params) {
     });
 }
 
+function getTopicReplyList(params) {
+    return $next().get(`/api/next2/community/discussion/my/topic/list`, {
+        params,
+    });
+}
+
 export {
     getDouyu,
     getUserMedals,
@@ -89,4 +95,5 @@ export {
     getBlackList,
     getBattleList,
     getTopicList,
+    getTopicReplyList,
 };

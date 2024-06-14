@@ -22,6 +22,7 @@ import Namespace from "../Namespace.vue";
 import Emotions from "@/components/Emotions";
 import Jokes from "@/components/Jokes";
 import Topic from "@/components/Topic";
+import Reply from "@/components/Reply";
 export default {
     name: "Other",
     components: {
@@ -42,6 +43,12 @@ export default {
                     value: "Topic",
                     component: Topic,
                     icon: "el-icon-collection",
+                },
+                {
+                    label: "回帖",
+                    value: "Reply",
+                    component: Reply,
+                    icon: "el-icon-tickets",
                 },
                 {
                     label: "小册",
