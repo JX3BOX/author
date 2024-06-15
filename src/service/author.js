@@ -78,9 +78,13 @@ function getTopicList(params) {
         params,
     });
 }
-
+/**
+ * 获取公开的所有回帖
+ *
+ */
+// https://next2.jx3box.com/api/next2/community/discussion/reply/list?user_id=8
 function getTopicReplyList(params) {
-    return $next().get(`/api/next2/community/discussion/my/topic/list`, {
+    return $next().get(`/api/next2/community/discussion/reply/list`, {
         params,
     });
 }

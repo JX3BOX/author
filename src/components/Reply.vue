@@ -7,7 +7,7 @@
                     <!-- 标题 -->
                     <h2 class="u-jokes">
                         <!-- 标题文字 -->
-                        <a :href="postLink(item.id)" class="u-title" target="_blank">{{ item.content || "无标题" }}</a>
+                        <a :href="postLink(item)" class="u-title" target="_blank" v-html="item.content || ''"></a>
                     </h2>
 
                     <!-- 作者 -->
@@ -53,14 +53,15 @@ export default {
         };
     },
     computed: {
+        uid: function () {
+            return this.$store.state.uid;
+        },
         params: function () {
             return {
+                user_id: this.uid,
                 index: this.page,
                 pageSize: this.per,
             };
-        },
-        uid: function () {
-            return this.$store.state.uid;
         },
     },
     methods: {
@@ -69,14 +70,17 @@ export default {
             getTopicReplyList(this.params)
                 .then((res) => {
                     this.list = res.data.data.list;
-                    this.total = res.data.data.total;
+                    this.total = res.data.data.page.pageTotal;
                 })
                 .finally(() => {
                     this.loading = false;
                 });
         },
-        postLink: function (id) {
-            return getLink("joke", id);
+        postLink: function (item) {
+            const floor = item.floor;
+            const communityPer = 10;
+            const page = Math.ceil((floor - 1) / communityPer);
+            return getLink("community", item.topic_id) + `?floor=${floor}&page=${page}`;
         },
         dateFormat: function (val) {
             return dayjs(val).format("YYYY-MM-DD HH:mm:ss");
