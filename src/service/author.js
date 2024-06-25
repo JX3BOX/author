@@ -30,6 +30,18 @@ function getUserPublicTeams(uid) {
         });
 }
 /**
+ * 判断是否拉黑用户
+ */
+
+function hadDenyUser(display_name) {
+    return $next().get(`/api/my-userlist/deny`, {
+        params: {
+            display_name,
+        },
+    });
+}
+
+/**
  * 拉黑用户
  * @param {*} userId 用户id
  */
@@ -100,4 +112,5 @@ export {
     getBattleList,
     getTopicList,
     getTopicReplyList,
+    hadDenyUser,
 };

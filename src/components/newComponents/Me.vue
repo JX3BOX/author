@@ -148,7 +148,7 @@
             <div class="m-right">
                 <!-- 关注 -->
                 <div class="m-focus u-in-phone" v-if="!isSelf">
-                    <div class="u-btn-box">
+                    <div v-if="!hadDeny" class="u-btn-box">
                         <el-button
                             icon="el-icon-plus"
                             class="u-btn-attention"
@@ -177,11 +177,16 @@
                             >
                         </div>
                     </div>
+                    <div class="u-btn-box" v-else>
+                        <el-button type="info" class="u-btn-cancel-deny" @click="handleUnDeny">取消拉黑</el-button>
+                    </div>
                     <el-popover placement="bottom-end" trigger="click" width="90" v-model="moreOperate">
                         <a href="/feedback" target="_blank">
                             <el-button size="mini" class="u-more-btn">举报</el-button> </a
                         ><br />
-                        <el-button size="mini" class="u-more-btn" @click="joinBlacklist">拉黑</el-button>
+                        <el-button v-if="!hadDeny" size="mini" class="u-more-btn" @click="joinBlacklist"
+                            >拉黑</el-button
+                        >
                         <div class="u-more" :style="userDefinedStyle.btn" slot="reference">
                             <img
                                 src="@/assets/img/more.svg"
@@ -226,7 +231,7 @@ import User from "@jx3box/jx3box-common/js/user";
 import { getFansCount } from "@jx3box/jx3box-common-ui/service/follow";
 import { tvLink } from "@jx3box/jx3box-common/js/utils";
 import dateFormat from "@/utils/dateFormat";
-import { deny, undeny } from "@/service/author";
+import { deny, undeny, hadDenyUser } from "@/service/author";
 import Left from "./Left";
 import Primary from "./Primary";
 import Honor from "@jx3box/jx3box-common-ui/src/author/AuthorHonor.vue";
@@ -254,6 +259,17 @@ export default {
             immediate: true,
             deep: true,
         },
+        display_name: {
+            immediate: true,
+            handler(display_name) {
+                if (display_name) {
+                    hadDenyUser(display_name).then((res) => {
+                        const list = res.data?.data?.list || [];
+                        this.hadDeny = !!list.length;
+                    });
+                }
+            },
+        },
     },
     data: function () {
         return {
@@ -279,6 +295,8 @@ export default {
             },
             // honor: null, //称号
             canSendLetter: false,
+            //是否拉黑
+            hadDeny: false,
         };
     },
     computed: {
@@ -326,6 +344,9 @@ export default {
         },
         sendLink: function () {
             return "/dashboard/letter?receiver=" + this.uid;
+        },
+        display_name() {
+            return this.authorInfo?.display_name;
         },
     },
     filters: {
@@ -446,6 +467,7 @@ export default {
                 .then(() => {
                     deny(this.uid)
                         .then(() => {
+                            this.hadDeny = true;
                             this.$message.success("拉黑成功");
                         })
                         .catch((err) => {
@@ -453,6 +475,17 @@ export default {
                         });
                 })
                 .catch((_) => {});
+        },
+        // 取消拉黑
+        handleUnDeny() {
+            undeny(this.uid)
+                .then(() => {
+                    this.hadDeny = false;
+                    this.$message.success("操作成功");
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         },
         avatarSizeChange() {
             let w = document.body.clientWidth || document.documentElement.clientWidth;
