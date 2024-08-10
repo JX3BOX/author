@@ -54,6 +54,7 @@ export default {
             this.$refs.canvas.width = 1520;
             this.$refs.canvas.height = 1060;
             const newImg = new Image();
+            newImg.setAttribute("crossOrigin", "anonymous");
             newImg.src = require("../assets/img/groupCertificate/bg.png");
             newImg.onload = () => {
                 this.drawImg(newImg, 0, 0, 1520, 1060);
@@ -120,6 +121,8 @@ export default {
                         color: "#000000",
                     },
                 });
+
+                this.canvasExport();
             };
         },
         loadDrawImage(src) {
@@ -134,7 +137,6 @@ export default {
         },
         drawImg(img, left, top, width, height) {
             this.drawCtx.drawImage(img, left, top, width, height);
-            this.canvasExport();
         },
         drawText(ctx, data) {
             let style = data.style;
