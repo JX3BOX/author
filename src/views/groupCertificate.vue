@@ -89,12 +89,12 @@ export default {
                     key: "team",
                     style: {
                         textAlign: "left",
-                        fontSize: 12,
+                        fontSize: 16,
                         left: 262,
                         top: 630,
                         color: "#756538",
                         width: 996,
-                        height: 20,
+                        height: 28,
                     },
                 });
                 // 赛事组
