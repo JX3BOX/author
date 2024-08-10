@@ -112,7 +112,7 @@ export default {
                 // 时间
                 this.drawText(ctx, {
                     type: "text",
-                    content: this.formatTimeString("yyyy年MM月dd日", this.contentData.team_certificate.awardtime),
+                    content: this.formatTimeString("yyyy年MM月dd日", this.contentData.team_certificate.time),
                     style: {
                         textAlign: "right",
                         fontSize: 28,
