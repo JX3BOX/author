@@ -25,8 +25,8 @@
                     <!-- 作者 -->
                     <div class="u-misc">
                         <span class="u-date">
-                            Created on
-                            <time>{{ dateFormat(item.createTime) }}</time>
+                            Created on 
+                            <time>{{ dateFormat(item.created_at) }}</time>
                         </span>
                     </div>
                 </li>

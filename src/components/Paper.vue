@@ -18,7 +18,7 @@
                     <div class="u-misc">
                         <span class="u-date">
                             Created on
-                            <time >{{ item.createTime | dateFormat }}</time>
+                            <time >{{ item.createTime || dateFormat }}</time>
                         </span>
                     </div>
                 </li>

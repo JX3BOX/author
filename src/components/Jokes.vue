@@ -10,11 +10,11 @@
                         <a :href="postLink(item.id)" class="u-title" target="_blank">{{ item.content || "无标题" }}</a>
                     </h2>
 
-                     <!-- 作者 -->
+                    <!-- 作者 -->
                     <div class="u-misc">
                         <span class="u-date">
                             Created on
-                            <time >{{ dateFormat(item.createTime) }}</time>
+                            <time >{{ dateFormat(item.created_at) }}</time>
                         </span>
                     </div>
                 </li>
