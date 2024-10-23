@@ -17,9 +17,6 @@
         padding: 20px 0;
     }
 }
-// .m-author-admin{
-//     .mt(@header-height + @bread-height);
-// }
 .m-post-list {
     p,
     p a {
@@ -48,12 +45,12 @@
         }
     }
 }
-//.m-tabs {
-//    padding: 20px;
-//    .is-active {
-//        .bold;
-//    }
-//    .el-tabs__nav-wrap {
-//        padding: 0 20px;
-//    }
-//}
+
+@media screen and (max-width: @phone) {
+    .wechat-miniprogram {
+        .m-author {
+            margin-top: 0;
+        }
+    }
+
+}
