@@ -1152,13 +1152,13 @@
     url "^0.11.0"
     vue "^2.6.11"
 
-"@jx3box/jx3box-common-ui@^9.0.11":
-  version "9.0.11"
-  resolved "https://registry.yarnpkg.com/@jx3box/jx3box-common-ui/-/jx3box-common-ui-9.0.11.tgz#051b8810a76a51849dd5f3554bfaa5ddf97444ad"
-  integrity sha512-lIcyJ1LbFB+QkvrQb/g04AWd53+qlydbyiZRmk9FclDGVnslExOJZXtvnvNWBfirCEulJ4H+mDKVOAiWCV/Gnw==
+"@jx3box/jx3box-common-ui@^9.0.12":
+  version "9.0.12"
+  resolved "https://registry.yarnpkg.com/@jx3box/jx3box-common-ui/-/jx3box-common-ui-9.0.12.tgz#28dc06a01357b79a2d1244e2eaed9e1df58d8443"
+  integrity sha512-AW/aOP0+hBlCbYNDzHRModa2AynqRBHod+KkHzp2MH1MNbkjF+DpEk7jWqTpWk8PG40OCgIULbe2UZ/+zic0pA==
   dependencies:
     "@jx3box/jx3box-comment-ui" "^1.9.9"
-    "@jx3box/jx3box-common" "^8.4.9"
+    "@jx3box/jx3box-common" "^8.5.2"
     "@jx3box/jx3box-data" "^3.7.0"
     "@jx3box/jx3box-editor" "^2.2.16"
     "@jx3box/reporter" "^0.0.4"
@@ -1236,7 +1236,7 @@
     uuid "^9.0.0"
     vue "^2.6.12"
 
-"@jx3box/jx3box-common@^8.4.9", "@jx3box/jx3box-common@^8.5.2":
+"@jx3box/jx3box-common@^8.5.2":
   version "8.5.2"
   resolved "https://registry.yarnpkg.com/@jx3box/jx3box-common/-/jx3box-common-8.5.2.tgz#7e977960e20c5fd8ac64616655a1a5d5b778a250"
   integrity sha512-RZRbSYS+CeE0NuxbDreYVE/lpGXApAteXXTPSxAu3uUfoO06xZFwEVGcEvUD1pvzJmW8q/yMwpsmEnWSHiRlxg==
