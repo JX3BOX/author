@@ -92,6 +92,7 @@ export default {
             return __clients[val];
         },
         loadData: function(i = 1) {
+            if (!this.uid) return;
             this.loading = true;
             getDBM(this.params)
                 .then((res) => {

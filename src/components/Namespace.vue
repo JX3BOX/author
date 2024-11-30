@@ -61,11 +61,11 @@ export default {
             return {
                 user_id: this.uid,
                 page: this.page,
-                per: this.per, 
+                per: this.per,
             };
         },
         uid : function (){
-            return this.$store.state.uid
+            return ~~this.$store.state.uid
         },
         userdata: function() {
             return this.$store.state.userdata;
@@ -73,6 +73,7 @@ export default {
     },
     methods: {
         loadData: function() {
+            if (!this.uid) return;
             this.loading = true;
             getNamespaces(this.params)
                 .then((res) => {

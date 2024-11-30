@@ -25,7 +25,7 @@
                     <!-- 作者 -->
                     <div class="u-misc">
                         <span class="u-date">
-                            Created on 
+                            Created on
                             <time>{{ dateFormat(item.created_at) }}</time>
                         </span>
                     </div>
@@ -75,11 +75,12 @@ export default {
             };
         },
         uid: function () {
-            return this.$store.state.uid;
+            return ~~this.$store.state.uid;
         },
     },
     methods: {
         loadData: function () {
+            if (!this.uid) return;
             this.loading = true;
             getTopicList(this.params)
                 .then((res) => {

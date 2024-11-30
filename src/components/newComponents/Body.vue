@@ -52,11 +52,14 @@ export default {
             }
         },
         uid : function (){
-            return this.$store.state.uid
+            return ~~this.$store.state.uid
         },
     },
     methods: {
         loadData: function() {
+            if (!this.uid) {
+                return;
+            }
             this.loading = true;
             getBodyList(this.params)
                 .then((res) => {
@@ -71,10 +74,6 @@ export default {
             let url=item.images?.[0];
             return url ? getThumbnail(url,360) : require("@/assets/img/body_null.png");
         },
-
-
-    },
-    filters: {
         dateFormat: function(val) {
             return dayjs(val).format('YYYY-MM-DD HH:mm:ss')
         },

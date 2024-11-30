@@ -1152,10 +1152,10 @@
     url "^0.11.0"
     vue "^2.6.11"
 
-"@jx3box/jx3box-common-ui@^9.0.12":
-  version "9.0.12"
-  resolved "https://registry.yarnpkg.com/@jx3box/jx3box-common-ui/-/jx3box-common-ui-9.0.12.tgz#28dc06a01357b79a2d1244e2eaed9e1df58d8443"
-  integrity sha512-AW/aOP0+hBlCbYNDzHRModa2AynqRBHod+KkHzp2MH1MNbkjF+DpEk7jWqTpWk8PG40OCgIULbe2UZ/+zic0pA==
+"@jx3box/jx3box-common-ui@^9.0.13":
+  version "9.0.13"
+  resolved "https://registry.yarnpkg.com/@jx3box/jx3box-common-ui/-/jx3box-common-ui-9.0.13.tgz#bf50ee15ae6100659ff99c026c42218289a74963"
+  integrity sha512-WiFH9abyqoUH1Gtr86D7fnNxFMeqXT6hjsvAt3HWyLnBG1RPw4MlsI8zGOHNibDHQEr7VaH/qoQHf2WiJVmQig==
   dependencies:
     "@jx3box/jx3box-comment-ui" "^1.9.9"
     "@jx3box/jx3box-common" "^8.5.2"

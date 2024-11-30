@@ -17,7 +17,7 @@
                     <div class="u-misc">
                         <span class="u-date">
                             Updated on
-                            <time>{{ item.updated | dateFormat }}</time>
+                            <time>{{ dateFormat(item.updated) }}</time>
                         </span>
                     </div>
                 </li>
@@ -65,11 +65,14 @@ export default {
             };
         },
         uid: function () {
-            return this.$store.state.uid;
+            return ~~this.$store.state.uid;
         },
     },
     methods: {
         loadData: function () {
+            if (!this.uid) {
+                return;
+            }
             this.loading = true;
             getCollections(this.params)
                 .then((res) => {
@@ -83,8 +86,6 @@ export default {
         postLink: function (id) {
             return getLink("collection", id);
         },
-    },
-    filters: {
         dateFormat: function (val) {
             return dateFormat(new Date(~~val * 1000));
         },

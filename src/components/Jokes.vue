@@ -61,11 +61,14 @@ export default {
             }
         },
         uid : function (){
-            return this.$store.state.uid
+            return ~~this.$store.state.uid
         }
     },
     methods: {
         loadData: function() {
+            if (!this.uid) {
+                return;
+            }
             this.loading = true;
             getUserJokes(this.params)
                 .then((res) => {

@@ -11,7 +11,7 @@
                     </h2>
                     <!-- 字段 -->
                     <div class="u-content u-desc">
-                        <i :class="item.client" class="u-client">{{ item.client | clientLabel }}</i>
+                        <i :class="item.client" class="u-client">{{ clientLabel(item.client) }}</i>
                         {{ item.desc || "这个配装没有任何描述" }}
                     </div>
 
@@ -19,7 +19,7 @@
                     <div class="u-misc">
                         <span class="u-date">
                             Updated on
-                            <time >{{ item.updated_at | dateFormat }}</time>
+                            <time >{{ dateFormat(item.updated_at) }}</time>
                         </span>
                     </div>
                 </li>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import {getLink, showAvatar,authorLink,} from "@jx3box/jx3box-common/js/utils";
+import {getLink,} from "@jx3box/jx3box-common/js/utils";
 import dateFormat from "../utils/dateFormat";
 import { getUserPz } from "@/service/cms.js";
 import { __postType, __clients, __Root, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
@@ -71,7 +71,7 @@ export default {
             };
         },
         uid: function() {
-            return this.$store.state.uid;
+            return ~~this.$store.state.uid;
         },
         client: function() {
             return this.$store.state.client;
@@ -79,6 +79,7 @@ export default {
     },
     methods: {
         loadData: function(i = 1) {
+            if (!this.uid) return;
             this.loading = true;
             getUserPz(this.params)
                 .then((res) => {
@@ -92,20 +93,8 @@ export default {
         postLink: function (id, client) {
             return this.root[client] + getLink('pz', id);
         },
-    },
-    filters: {
-        authorLink,
         dateFormat: function(val) {
             return dateFormat(new Date(val));
-        },
-        showMark: function(val) {
-            return mark_map[val] || val;
-        },
-        showAvatar: function(userinfo) {
-            return showAvatar(userinfo?.user_avatar);
-        },
-        showNickname : function (userinfo){
-            return userinfo?.display_name || '匿名'
         },
         clientLabel: function(val) {
             val = val || "std";

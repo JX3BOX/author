@@ -54,7 +54,7 @@ export default {
     },
     computed: {
         uid: function () {
-            return this.$store.state.uid;
+            return ~~this.$store.state.uid;
         },
         params: function () {
             return {
@@ -66,6 +66,7 @@ export default {
     },
     methods: {
         loadData: function () {
+            if (!this.uid) return;
             this.loading = true;
             getTopicReplyList(this.params)
                 .then((res) => {

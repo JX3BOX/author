@@ -73,7 +73,7 @@ export default {
             return this.userdata.display_name;
         },
         uid : function (){
-            return this.$store.state.uid
+            return ~~this.$store.state.uid
         },
         userdata: function() {
             return this.$store.state.userdata;

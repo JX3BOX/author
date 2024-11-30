@@ -52,7 +52,7 @@ export default {
             return {
                 user_id: this.uid,
                 page: 1,
-                per: 5, 
+                per: 5,
             };
         },
     },
@@ -62,6 +62,9 @@ export default {
         },
     },
     mounted() {
+        if (!this.uid) {
+            return;
+        }
         this.installModules();
         this.getNamespacesList();
     },

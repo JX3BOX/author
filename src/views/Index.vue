@@ -50,7 +50,7 @@ export default {
     },
     created: function () {
         if (this.uid) {
-            this.$store.state.uid = this.uid;
+            this.$store.state.uid = ~~this.uid;
             getUserInfo(this.uid).then((res) => {
                 this.$store.state.userdata = res.data.data;
             });

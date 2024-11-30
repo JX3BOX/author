@@ -76,6 +76,7 @@ export default {
             this.zip = code.slice(2, 8);
         },
         loadData: function () {
+            if (!this.uid) return;
             return getUserInfo(this.uid).then((res) => {
                 this.userdata = res.data.data;
             });

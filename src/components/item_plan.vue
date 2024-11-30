@@ -64,7 +64,7 @@ export default {
             }
         },
         uid : function (){
-            return this.$store.state.uid
+            return ~~this.$store.state.uid
         },
         userdata: function() {
             return this.$store.state.userdata;
@@ -72,6 +72,7 @@ export default {
     },
     methods: {
         loadData: function() {
+            if (!this.uid) return;
             this.loading = true;
             getPlans(this.params)
                 .then((res) => {

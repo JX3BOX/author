@@ -52,11 +52,14 @@ export default {
             }
         },
         uid : function (){
-            return this.$store.state.uid
+            return ~~this.$store.state.uid
         },
     },
     methods: {
         loadData: function() {
+            if (!this.uid) {
+                return;
+            }
             this.loading = true;
             getFaceList(this.params)
                 .then((res) => {
@@ -70,13 +73,6 @@ export default {
         showThumb: function (item) {
             let url=item.images?.[0] || __imgPath + "image/face/null2.png";
             return getThumbnail(url,360);
-        },
-
-
-    },
-    filters: {
-        dateFormat: function(val) {
-            return dayjs(val).format('YYYY-MM-DD HH:mm:ss')
         },
     },
     watch : {

@@ -302,7 +302,7 @@ export default {
     },
     computed: {
         uid: function () {
-            return this.$store.state.uid;
+            return ~~this.$store.state.uid;
         },
         data: function () {
             return this.$store.state.userdata;
@@ -408,6 +408,9 @@ export default {
                 User.toLogin();
                 return;
             }
+            if (!this.uid) {
+                return;
+            }
             follow(this.uid)
                 .then((res) => {
                     this.$message.success("关注成功");
@@ -450,7 +453,10 @@ export default {
             }
         },
         loadFans() {
-            getFansCount(this.$store.state.uid).then((res) => {
+            if (!this.uid) {
+                return;
+            }
+            getFansCount(this.uid).then((res) => {
                 this.fansNum = res.data.data.follower_count || 0;
                 this.isFollow = res.data.data.is_followed;
             });

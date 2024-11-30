@@ -42,6 +42,7 @@ export default {
     },
     methods: {
         load() {
+            if (!this.id) return
             getCertification(this.id).then((res) => {
                 this.contentData = res.data.data;
                 this.draw();

@@ -25,7 +25,7 @@
                 <i class="u-icon u-icon-join">
                     <img svg-inline src="../assets/img/join.svg" />
                 </i>
-                <span>加入于 {{ data.user_registered | time }}</span>
+                <span>加入于 {{ time(data.user_registered) }}</span>
             </span>
             <div class="u-medals" v-if="medals && medals.length">
                 <medal :medals="medals" :showIcon="showMedalIcon"></medal>
@@ -39,7 +39,7 @@
                             <a
                                 v-if="data.weibo_name"
                                 class="u-weibo"
-                                :href="data.weibo_id | getWeiboLink"
+                                :href="getWeiboLink(data.weibo_id)"
                                 target="_blank"
                             >
                                 <img svg-inline src="../assets/img/weibo.svg" />
@@ -52,7 +52,7 @@
                             <a
                                 v-if="data.github_name"
                                 class="u-github"
-                                :href="data.github_name | getGithubLink"
+                                :href="getGithubLink(data.github_name)"
                                 target="_blank"
                             >
                                 <img svg-inline src="../assets/img/github.svg" />
@@ -83,8 +83,8 @@
                 <el-row :gutter="20">
                     <el-col :span="6" v-for="(item, i) in teams" :key="i">
                         <div>
-                            <a class="u-team" :href="item.team_id | teamLink">
-                                <img class="u-team-logo" :src="item.team_logo | showTeamLogo" />
+                            <a class="u-team" :href="teamLink(item.team_id)">
+                                <img class="u-team-logo" :src="showTeamLogo(item.team_logo)" />
                                 <span class="u-team-name">{{ item.team_name }}</span>
                             </a>
                         </div>
@@ -121,7 +121,7 @@ export default {
     },
     computed: {
         uid: function () {
-            return this.$store.state.uid;
+            return ~~this.$store.state.uid;
         },
         data: function () {
             return this.$store.state.userdata;
@@ -160,34 +160,26 @@ export default {
             return User.getLevel(this.data?.experience || 0);
         },
     },
-    filters: {
-        time: (val) => {
-            return dateFormat(new Date(val));
-        },
-        showMedalDesc: function (item) {
-            return item.medal_desc || medal_map[item.medal];
-        },
-        showAvatar: function (val) {
-            return showAvatar(val, 360);
-        },
-        teamLink: function (val) {
-            return getLink("org", val);
-        },
-        showTeamLogo: function (val) {
-            return showAvatar(val, 32);
-        },
+    methods: {
         getWeiboLink: function (val) {
             return "https://weibo.com/" + val;
         },
         getGithubLink: function (val) {
             return "https://github.com/" + val;
         },
-    },
-    methods: {
         init: function () {
             this.loadFrames();
             this.loadMedals();
             this.loadTeams();
+        },
+        time: (val) => {
+            return dateFormat(new Date(val));
+        },
+        showTeamLogo: function (val) {
+            return showAvatar(val, 32);
+        },
+        teamLink: function (val) {
+            return getLink("org", val);
         },
         loadMedals: function () {
             if (!this.uid) return;
@@ -203,6 +195,7 @@ export default {
             });
         },
         loadTeams: function () {
+            if (!this.uid) return;
             getUserPublicTeams(this.uid).then((data) => {
                 this.teams = data || [];
             });

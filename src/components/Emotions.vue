@@ -52,11 +52,14 @@ export default {
             }
         },
         uid : function (){
-            return this.$store.state.uid
+            return ~~this.$store.state.uid
         }
     },
     methods: {
         loadData: function() {
+            if (!this.uid) {
+                return;
+            }
             this.loading = true;
             getUserEmotions(this.params)
                 .then((res) => {
@@ -135,11 +138,6 @@ export default {
             }
             return result;
         }
-    },
-    filters: {
-        dateFormat: function(val) {
-            return dayjs(val).format('YYYY-MM-DD HH:mm:ss')
-        },
     },
     watch : {
         params : {
