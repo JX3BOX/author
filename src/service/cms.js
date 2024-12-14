@@ -1,6 +1,6 @@
 import { $cms, $team } from "@jx3box/jx3box-common/js/https";
 import axios from "axios";
-import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __imgPath, __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 
 function getPosts(params) {
     return $cms().get(`/api/cms/posts`, {
@@ -51,12 +51,12 @@ function getDecoration(params) {
 }
 
 function getDecorationJson() {
-    let url = __imgPath + `decoration/index.json?${Date.now()}}`;
+    let url = __cdn + `design/decoration/index.json`;
     return axios.get(url);
 }
 
 function getHonorJson() {
-    let url = __imgPath + `decoration/honor.json?${Date.now()}}}`;
+    let url = __imgPath + `decoration/honor.json?${Date.now()}}`;
     return axios.get(url);
 }
 
