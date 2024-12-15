@@ -55,11 +55,6 @@ function getDecorationJson() {
     return axios.get(url);
 }
 
-function getHonorJson() {
-    let url = __imgPath + `decoration/honor.json?${Date.now()}}`;
-    return axios.get(url);
-}
-
 function getDBM(params) {
     return $cms().get(`/api/cms/dbm/pkg`, {
         params,
@@ -80,7 +75,6 @@ export {
     getUserEmotions,
     getDecoration,
     getDecorationJson,
-    getHonorJson,
     getDBM,
     getCertification,
 };
