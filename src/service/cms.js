@@ -51,7 +51,7 @@ function getDecoration(params) {
 }
 
 function getDecorationJson() {
-    let url = __cdn + `design/decoration/index.json`;
+    let url = __cdn + `design/decoration/index.json?${Math.random()}`;
     return axios.get(url);
 }
 
