@@ -7,7 +7,9 @@
                     <span class="u-name" :style="userDefinedStyle.userName">
                         <span @click="copyData(data.display_name || '匿名')">{{ data.display_name || "匿名" }}</span
                         ><span class="u-uid" @click="copyData(data.ID || 0)">（UID : {{ data.ID || 0 }}）</span>
-                        <el-tag type="info" class="u-mute-tag" v-if="data.user_status" size="small" effect="dark">已禁言</el-tag>
+                        <el-tag type="info" class="u-mute-tag" v-if="data.user_status" size="small" effect="dark"
+                            >已禁言</el-tag
+                        >
                     </span>
                     <div class="u-tips">
                         <el-tooltip :content="`当前经验 ${data.experience || 0}`" placement="top">
@@ -400,7 +402,9 @@ export default {
                     color: decoration.buttontextcolor,
                 };
             }
-            this.userDefinedStyle.banner = __imgPath + `decoration/images/${decoration.name}/homebanner.png`;
+            const webp = ["jx3box-birthday-5"];
+            this.userDefinedStyle.banner =
+                __imgPath + `decoration/images/${decoration.name}/homebanner.${webp.includes(decoration.name) ? "webp" : "png"}`;
         },
         // 关注
         follow() {

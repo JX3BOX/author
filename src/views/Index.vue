@@ -127,7 +127,6 @@ export default {
             if (theme.homebg_rb) {
                 bgImg.push(`url(${this.showDecoration(theme.name, `homebg_rb@${size}x`)})  no-repeat fixed bottom right / cover`);
             }
-            console.log(bgImg);
             this.themeStyle = {
                 background: bgImg.toString(),
             };
