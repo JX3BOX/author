@@ -227,7 +227,7 @@
 
 <script>
 import { follow, unfollow } from "@jx3box/jx3box-common-ui/service/follow";
-import { __userLevelColor, __imgPath } from "@jx3box/jx3box-common/data/jx3box";
+import { __userLevelColor, __imgPath, __cdn } from "@jx3box/jx3box-common/data/jx3box";
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
 import frames from "@jx3box/jx3box-common/data/user_avatar_frame.json";
 import User from "@jx3box/jx3box-common/js/user";
@@ -294,7 +294,7 @@ export default {
                 userName: {},
                 honor: {},
                 sendMsg: {},
-                banner: `${__imgPath}/decoration/images/0_TESTSAMPLE/homebanner.png`,
+                banner: `${__cdn}design/decoration/images/0_TESTSAMPLE/homebanner.png`,
             },
             // honor: null, //称号
             canSendLetter: false,
@@ -404,7 +404,7 @@ export default {
             }
             const webp = ["jx3box-birthday-5"];
             this.userDefinedStyle.banner =
-                __imgPath + `decoration/images/${decoration.name}/homebanner.${webp.includes(decoration.name) ? "webp" : "png"}`;
+                __cdn + `design/decoration/images/${decoration.name}/homebanner.${webp.includes(decoration.name) ? "webp" : "png"}`;
         },
         // 关注
         follow() {

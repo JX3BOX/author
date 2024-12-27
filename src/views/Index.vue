@@ -14,8 +14,7 @@ import AppLayout from "@/layouts/AppLayout.vue";
 import Me from "@/components/newComponents/Me.vue";
 import { getUserInfo, getDecoration, getDecorationJson } from "@/service/cms";
 import User from "@jx3box/jx3box-common/js/user";
-import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
-import logoVue from "@jx3box/jx3box-common-ui/src/header/logo.vue";
+import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 const DECORATION_JSON = "decoration_json";
 const DECORATION_KEY = "decoration_me";
 export default {
@@ -101,7 +100,7 @@ export default {
             });
         },
         showDecoration: function (val, type) {
-            return __imgPath + `decoration/images/${val}/${type}.png`;
+            return __cdn + `design/decoration/images/${val}/${type}.png`;
         },
         setDecoration(theme) {
             this.decorationMe = theme;
