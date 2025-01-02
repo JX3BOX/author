@@ -1,7 +1,7 @@
 <template>
     <div class="c-author">
         <!--粉丝团-->
-        <AuthorFans :uid="Number(uid)" class="m-common-box m-fans"></AuthorFans>
+        <AuthorFans :uid="Number(uid)" class="m-common-box m-fans" :fansLimit="20"></AuthorFans>
         <div class="m-common-box m-user-bio">
             <div class="u-label"><i class="el-icon-edit"></i><span>TA的签名</span></div>
             <div class="u-userBio">
