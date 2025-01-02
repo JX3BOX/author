@@ -39,7 +39,7 @@ export default {
             active: "Topic",
             types: [
                 {
-                    label: "帖子",
+                    label: "主题",
                     value: "Topic",
                     component: Topic,
                     icon: "el-icon-collection",

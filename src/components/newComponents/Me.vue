@@ -129,15 +129,17 @@
                             @click="toFans"
                             :class="isSelf ? 'self' : ''"
                             :style="userDefinedStyle.fans"
+                            v-if="diffYearText"
                         >
-                            <i class="u-icon u-icon-fans">
+                            <!-- <i class="u-icon u-icon-fans">
                                 <img
                                     svg-inline
                                     src="../../assets/img/fans.svg"
                                     class="u-svg"
                                     :style="userDefinedStyle.fans"
                                 /> </i
-                            >粉丝数 <b>{{ fansNum }}</b>
+                            >粉丝数 <b>{{ fansNum }}</b> -->
+                            <el-tag type="primary">{{ diffYearText }}</el-tag>
                         </div>
                     </div>
                 </div>
@@ -207,15 +209,16 @@
                         </i>
                         <span>加入于 {{ data.user_registered | time }}</span>
                     </div>
-                    <div class="u-fans" @click="toFans" :class="isSelf ? 'self' : ''" :style="userDefinedStyle.fans">
-                        <i class="u-icon u-icon-fans">
+                    <div v-if="diffYearText" class="u-fans" @click="toFans" :class="isSelf ? 'self' : ''" :style="userDefinedStyle.fans">
+                        <!-- <i class="u-icon u-icon-fans">
                             <img
                                 svg-inline
                                 src="../../assets/img/fans.svg"
                                 class="u-svg"
                                 :style="userDefinedStyle.fans"
                             /> </i
-                        >粉丝数 <b>{{ fansNum }}</b>
+                        >粉丝数 <b>{{ fansNum }}</b> -->
+                        <el-tag type="primary">{{ diffYearText }}</el-tag>
                     </div>
                 </div>
 
@@ -351,6 +354,27 @@ export default {
         display_name() {
             return this.authorInfo?.display_name;
         },
+        diffYear() {
+            return this.getYearDiff(this.data.user_registered);
+        },
+        // TODO: 后续改成图片
+        diffYearText() {
+            const obj = {
+                "3": "三年老粉",
+                "5": "五年元老",
+                "10": "十年长者",
+            }
+
+            if (this.diffYear >= 10) {
+                return obj["10"];
+            } else if (this.diffYear >= 5) {
+                return obj["5"];
+            } else if (this.diffYear >= 3) {
+                return obj["3"];
+            } else {
+                return "";
+            }
+        }
     },
     filters: {
         time: (val) => {
@@ -404,7 +428,10 @@ export default {
             }
             const webp = ["jx3box-birthday-5"];
             this.userDefinedStyle.banner =
-                __cdn + `design/decoration/images/${decoration.name}/homebanner.${webp.includes(decoration.name) ? "webp" : "png"}`;
+                __cdn +
+                `design/decoration/images/${decoration.name}/homebanner.${
+                    webp.includes(decoration.name) ? "webp" : "png"
+                }`;
         },
         // 关注
         follow() {
@@ -513,6 +540,20 @@ export default {
             if (this.isSelf) {
                 window.open(this.fansLink, "_blank");
             }
+        },
+        // 距离现在多久
+        getYearDiff(dateStr) {
+            const past = new Date(dateStr);
+            const now = new Date();
+
+            // 获取时间差的毫秒数
+            const diffTime = now - past;
+
+            // 转换为年
+            // 用毫秒数除以一年的毫秒数 (365.25天以考虑闰年)
+            const years = diffTime / (1000 * 60 * 60 * 24 * 365.25);
+
+            return Math.floor(years);
         },
     },
     created() {

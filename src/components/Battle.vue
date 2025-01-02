@@ -42,7 +42,7 @@
 
 <script>
 import { getBattleList } from "@/service/author.js";
-import dateFormat from "../utils/dateFormat";
+import {showTime} from "@jx3box/jx3box-common/js/moment";
 export default {
     props: [],
     data: function() {
@@ -80,7 +80,9 @@ export default {
         postLink: function(id) {
            return "/battle/#/combat/" + id;
         },
-        dateFormat
+        dateFormat: function(val) {
+            return showTime(val);
+        },
     },
     watch : {
         params : {

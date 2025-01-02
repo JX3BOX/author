@@ -58,6 +58,11 @@ export default {
                     component: Wiki,
                 },
                 {
+                    label: "论坛",
+                    value: "Other",
+                    component: Other,
+                },
+                {
                     label: "数据",
                     value: "Data",
                     component: Data,
@@ -67,11 +72,6 @@ export default {
                     value: "Fallow",
                     component: Fallow,
                 },
-                {
-                    label: "其他",
-                    value: "Other",
-                    component: Other,
-                }
             ],
         };
     },

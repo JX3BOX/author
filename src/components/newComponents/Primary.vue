@@ -8,22 +8,22 @@
                 {{ data.user_bio || "这个人太懒了~没有写签名。" }}
             </div>
         </div>
-        <div class="m-common-box m-links" v-if="data != '' && (data.weibo_id || data.github_id || data.tv_id)">
+        <!-- <div class="m-common-box m-links" v-if="data != '' && (data.weibo_id || data.github_id || data.tv_id)">
             <div class="u-label"><i class="el-icon-user"></i><span>TA的信息</span></div>
             <AuthorLink class="u-links-box" :uid="uid" :data="data" />
-        </div>
+        </div> -->
         <!--他的荣誉-->
         <AuthorMedals :uid="uid" class="u-trophy m-common-box m-medals"></AuthorMedals>
         <!--他的团队-->
-        <AuthorTeams :uid="uid" class="u-teams m-common-box m-teams"></AuthorTeams>
+        <!-- <AuthorTeams :uid="uid" class="u-teams m-common-box m-teams"></AuthorTeams> -->
     </div>
 </template>
 
 <script>
 import AuthorFans from "@jx3box/jx3box-common-ui/src/author/AuthorFans";
-import AuthorLink from "@jx3box/jx3box-common-ui/src/author/AuthorLink";
+// import AuthorLink from "@jx3box/jx3box-common-ui/src/author/AuthorLink";
 import AuthorMedals from "@jx3box/jx3box-common-ui/src/author/AuthorMedals";
-import AuthorTeams from "@jx3box/jx3box-common-ui/src/author/AuthorTeams";
+// import AuthorTeams from "@jx3box/jx3box-common-ui/src/author/AuthorTeams";
 import { getUserInfo } from "@jx3box/jx3box-common-ui/service/author";
 
 // 铭牌
@@ -33,9 +33,9 @@ export default {
     name: "Primary",
     components: {
         AuthorFans,
-        AuthorLink,
+        // AuthorLink,
         AuthorMedals,
-        AuthorTeams,
+        // AuthorTeams,
     },
     data: function () {
         return {
