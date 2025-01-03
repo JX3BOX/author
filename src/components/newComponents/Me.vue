@@ -126,7 +126,6 @@
                         </div>
                         <div
                             class="u-fans"
-                            @click="toFans"
                             :class="isSelf ? 'self' : ''"
                             :style="userDefinedStyle.fans"
                             v-if="diffYearText"
@@ -139,7 +138,7 @@
                                     :style="userDefinedStyle.fans"
                                 /> </i
                             >粉丝数 <b>{{ fansNum }}</b> -->
-                            <el-tag type="primary">{{ diffYearText }}</el-tag>
+                            <el-tag type="primary" size="small">{{ diffYearText }}</el-tag>
                         </div>
                     </div>
                 </div>
@@ -209,7 +208,7 @@
                         </i>
                         <span>加入于 {{ data.user_registered | time }}</span>
                     </div>
-                    <div v-if="diffYearText" class="u-fans" @click="toFans" :class="isSelf ? 'self' : ''" :style="userDefinedStyle.fans">
+                    <div v-if="diffYearText" class="u-fans" :class="isSelf ? 'self' : ''" :style="userDefinedStyle.fans">
                         <!-- <i class="u-icon u-icon-fans">
                             <img
                                 svg-inline
@@ -218,7 +217,7 @@
                                 :style="userDefinedStyle.fans"
                             /> </i
                         >粉丝数 <b>{{ fansNum }}</b> -->
-                        <el-tag type="primary">{{ diffYearText }}</el-tag>
+                        <el-tag type="primary" size="small">{{ diffYearText }}</el-tag>
                     </div>
                 </div>
 
