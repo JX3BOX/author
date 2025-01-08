@@ -47,7 +47,10 @@
     "10": {
         "name": "2023七夕",
         "currency": "boxcoin",
-        "component": "Card2023Qixi"
+        "component": "Card2023Qixi",
+        "key": "qixi",
+        "type": "qixi",
+        "imgList": ["text.png", "bg.png", "line.png"]
     },
     "11": {
         "name": "2023中秋节",

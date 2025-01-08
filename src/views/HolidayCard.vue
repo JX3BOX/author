@@ -16,9 +16,18 @@ import Card2024Children from "@/components/card/Card2024Children.vue";
 import Card2024Spring from "@/components/card/Card2024Spring.vue";
 import Card2024NewYear from "@/components/card/Card2024NewYear.vue";
 import Card2023Christmas from "@/components/card/Card2023Christmas.vue";
+import Card2023Qixi from "@/components/card/Card2023Qixi.vue";
 export default {
     name: "holidayCard",
-    components: { AppLayout, DefaultTemplate, Card2024Children, Card2024Spring, Card2024NewYear, Card2023Christmas },
+    components: {
+        AppLayout,
+        DefaultTemplate,
+        Card2024Children,
+        Card2024Spring,
+        Card2024NewYear,
+        Card2023Christmas,
+        Card2023Qixi,
+    },
     data: function () {
         return {
             cardType,
@@ -71,6 +80,7 @@ export default {
                 spring: this.spring_data,
                 newyear: this.newyear_data,
                 christmas: this.christmas_data,
+                qixi: this.qixi_data,
             };
             return _data[this.cardType[this.event_id]?.type];
         },
@@ -119,6 +129,14 @@ export default {
         // 圣诞
         christmas_data() {
             return {
+                countImg: `${this.imgLink}${this.fontCount}.png`,
+                imgList: this.imgList.map((item) => `${this.imgLink}${item}`),
+            };
+        },
+        // 七夕
+        qixi_data() {
+            return {
+                fontCount: this.fontCount,
                 countImg: `${this.imgLink}${this.fontCount}.png`,
                 imgList: this.imgList.map((item) => `${this.imgLink}${item}`),
             };
