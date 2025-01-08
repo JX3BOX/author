@@ -42,7 +42,10 @@
     "9": {
         "name": "2023端午节",
         "currency": "boxcoin",
-        "component": "Card2023DragonBoat"
+        "key": "dragonBoatFestival",
+        "type": "dragon",
+        "component": "Card2023DragonBoat",
+        "imgList": ["bg.svg", "text.svg", "cover.svg"]
     },
     "10": {
         "name": "2023七夕",
