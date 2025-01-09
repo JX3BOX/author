@@ -1,7 +1,7 @@
 <template>
     <AppLayout>
         <div class="m-main m-index-popup">
-            <component :is="event_component" :data="component_data" @checked="checked" @close="goBack" />
+            <component :is="event_component" :data="component_data" @close="goBack" />
         </div>
     </AppLayout>
 </template>
@@ -42,7 +42,6 @@ export default {
     data: function () {
         return {
             cardType,
-            check: false,
             list: [],
         };
     },
@@ -210,9 +209,6 @@ export default {
                 const ids = this.list.map((item) => item.id);
                 if (!ids.includes(~~this.my_card_id)) this.goBack();
             });
-        },
-        checked() {
-            this.check = true;
         },
     },
 };

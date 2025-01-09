@@ -56,7 +56,7 @@ export default {
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 23px auto;
-        transition: all 0.5s ease-in-out;
+        transition: all 0.8s ease-in-out;
         &.show {
             opacity: 1;
         }
