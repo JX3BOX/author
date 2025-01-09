@@ -10,6 +10,7 @@
     </div>
 </template>
 <script>
+import User from "@jx3box/jx3box-common/js/user";
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "cardAutumn",
@@ -27,7 +28,7 @@ export default {
             return this.data.imgList;
         },
         username() {
-            return localStorage.getItem("name") || "";
+            return User.getInfo().name;
         },
     },
     watch: {},

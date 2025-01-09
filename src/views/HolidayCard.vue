@@ -21,6 +21,7 @@ import CardDragonBoat from "@/components/card/CardDragonBoat.vue";
 import CardLantern from "@/components/card/CardLantern.vue";
 import CardAutumn from "@/components/card/CardAutumn.vue";
 import DoubleScreen from "@/components/card/DoubleScreen.vue";
+import OneScreen from "@/components/card/OneScreen.vue";
 
 export default {
     name: "holidayCard",
@@ -36,6 +37,7 @@ export default {
         CardLantern,
         CardAutumn,
         DoubleScreen,
+        OneScreen,
     },
     data: function () {
         return {
@@ -94,6 +96,7 @@ export default {
                 lantern: this.newyear_data,
                 autumn: this.newyear_data,
                 double: this.double_data,
+                one: this.one_data,
             };
             return _data[this.cardType[this.event_id]?.type];
         },
@@ -104,7 +107,6 @@ export default {
             const countImgList = String(this.fontCount)
                 .split("")
                 .map((item) => `${this.imgLink}${item}.png`);
-
             const data = {
                 imgList: this.imgList.map((item) => `${this.imgLink}${item}`),
                 fontCount: this.fontCount,
@@ -179,6 +181,16 @@ export default {
                 bgImg: `${this.imgLink}bg.png`,
             };
         },
+        one_data() {
+            const key = this.event_key;
+            const text = this.cardType[this.event_id]?.text;
+            const data = {
+                fontCount: this.fontCount,
+                imgLink: __imgPath + `topic/festival/${key}.png`,
+            };
+            if (text) data.text = text;
+            return data;
+        },
     },
     watch: {
         my_card_id: {
@@ -195,8 +207,8 @@ export default {
         load() {
             getHolidayCard().then((res) => {
                 this.list = res?.data || [];
-                // const ids = this.list.map((item) => item.id);
-                // if (!ids.includes(this.my_card_id)) this.goBack();
+                const ids = this.list.map((item) => item.id);
+                if (!ids.includes(~~this.my_card_id)) this.goBack();
             });
         },
         checked() {

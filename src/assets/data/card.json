@@ -1,11 +1,16 @@
 {
     "1": {
         "name": "2022春节",
-        "component": "CardSpring"
+        "key": "2022spring",
+        "type": "one",
+        "component": "OneScreen"
     },
     "2": {
         "name": "2022端午节",
-        "component": "CardDragonBoat"
+        "key": "2022dragon",
+        "type": "one",
+        "text": "2022端午节快乐！",
+        "component": "OneScreen"
     },
     "3": {
         "name": "2022七夕",
