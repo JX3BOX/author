@@ -69,7 +69,7 @@ export default {
     },
 };
 </script>
-<style lang="less">
+<style lang="less" scope>
 .defaultTemplate {
     .pr;
     .pointer;

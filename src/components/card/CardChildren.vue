@@ -1,5 +1,5 @@
 <template>
-    <div class="card2024Children" @click.stop>
+    <div class="cardChildren" @click.stop>
         <div class="children-card" @click="change">
             <template v-if="!show">
                 <img :class="`children-card__img animation ${show ? '' : 'fadeInUp'}`" :src="bgImg" />
@@ -16,7 +16,7 @@
 </template>
 <script>
 export default {
-    name: "Card2024Children",
+    name: "CardChildren",
     props: ["data"],
     computed: {
         bgImg() {
@@ -47,8 +47,8 @@ export default {
     },
 };
 </script>
-<style lang="less">
-.card2024Children {
+<style lang="less" scope>
+.cardChildren {
     .pr;
     display: flex;
     align-items: center;

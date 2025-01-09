@@ -1,29 +1,39 @@
 {
     "1": {
         "name": "2022春节",
-        "component": "Card2022Spring"
+        "component": "CardSpring"
     },
     "2": {
         "name": "2022端午节",
-        "component": "Card2022DragonBoat"
+        "component": "CardDragonBoat"
     },
     "3": {
         "name": "2022七夕",
-        "component": "Card2022Qixi"
+        "bg": "bg.png",
+        "key": "seven",
+        "type": "double",
+        "component": "DoubleScreen",
+        "imgList": ["petal.png", "look.png", "left.png", "right.png", "boxcion.png", "close.png"]
     },
     "4": {
         "name": "2022中秋节",
-        "component": "Card2022MidAutumn"
+        "key": "midAutumn",
+        "type": "autumn",
+        "component": "CardAutumn",
+        "imgList": ["one.png", "two.png"]
     },
     "5": {
         "name": "2022圣诞节",
-        "component": "Card2022Christmas"
+        "key": "christmas",
+        "type": "christmas",
+        "component": "CardChristmas",
+        "imgList": ["cover.jpg", "button.png", "bg.jpg"]
     },
     "6": {
         "name": "2023元旦",
         "key": "newYearsDay",
         "type": "newyear",
-        "component": "Card2024NewYear",
+        "component": "CardNewYear",
         "imgList": ["P1-BG.jpg", "p2-01.jpg", "ClickButton-1.png", "CloseButton-1.png"]
     },
     "7": {

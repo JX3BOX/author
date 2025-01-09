@@ -1,5 +1,5 @@
 <template>
-    <div :class="year ? 'card2024SpringYear' : 'card2024Spring'" @click.stop>
+    <div :class="year ? 'cardSpringYear' : 'cardSpring'" @click.stop>
         <div class="u-springFestival-card" v-if="year" :class="show ? 'u-card-on' : 'u-card-off'" @click="change">
             <img class="u-card-bg" :src="bg" alt="新年快乐" />
             <img class="u-card-cover" :src="cover" alt="新年快乐" />
@@ -17,7 +17,7 @@
 </template>
 <script>
 export default {
-    name: "card2024Spring",
+    name: "cardSpring",
     props: ["data"],
     computed: {
         year() {
@@ -75,7 +75,7 @@ export default {
     },
 };
 </script>
-<style lang="less">
+<style lang="less" scope>
 @import "~@/assets/css/animation.less";
 .m-animation {
     -webkit-animation-duration: 0.5s;
@@ -83,7 +83,7 @@ export default {
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
 }
-.card2024Spring {
+.cardSpring {
     .pf;
     .full;
     .lt(0);
@@ -119,7 +119,7 @@ export default {
     }
 }
 @media screen and (min-width: @2k) {
-    .card2024Spring {
+    .cardSpring {
         .u-springFestival-card {
             .size(600px,1100px);
             .ct(o,600px,1100px);
@@ -127,7 +127,7 @@ export default {
     }
 }
 
-.card2024SpringYear {
+.cardSpringYear {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -186,7 +186,7 @@ export default {
     transition: all 1s;
 }
 @media screen and (max-width: @phone) {
-    .card2024SpringYear {
+    .cardSpringYear {
         .u-springFestival-card {
             .u-card-bg,
             .u-card-cover,

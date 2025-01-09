@@ -1,5 +1,5 @@
 <template>
-    <div class="card2023Christmas" @click.stop>
+    <div class="cardChristmas" @click.stop>
         <div class="christmas-card" @click="change">
             <template v-if="!show">
                 <img class="christmas-card__img" :src="imgList[0]" alt="圣诞节快乐" />
@@ -19,7 +19,7 @@
 </template>
 <script>
 export default {
-    name: "card2023Christmas",
+    name: "cardChristmas",
     props: ["data"],
     computed: {
         countImg() {
@@ -44,8 +44,8 @@ export default {
     },
 };
 </script>
-<style lang="less">
-.card2023Christmas {
+<style lang="less" scope>
+.cardChristmas {
     display: flex;
     align-items: center;
     justify-content: center;

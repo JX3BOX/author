@@ -1,5 +1,5 @@
 <template>
-    <div class="card2023DragonBoat" @click.stop>
+    <div class="cardDragonBoat" @click.stop>
         <div :class="['u-count', { show }]" :style="{ backgroundImage: `url('${countImg}')` }"></div>
         <div class="u-img mark" :class="{ show }"></div>
         <el-image
@@ -15,7 +15,7 @@
 </template>
 <script>
 export default {
-    name: "card2023DragonBoat",
+    name: "cardDragonBoat",
     props: ["data"],
     computed: {
         countImg() {
@@ -41,8 +41,8 @@ export default {
     },
 };
 </script>
-<style lang="less">
-.card2023DragonBoat {
+<style lang="less" scope>
+.cardDragonBoat {
     .pr;
     .size(282px,100%);
     .auto(x);

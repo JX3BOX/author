@@ -1,5 +1,5 @@
 <template>
-    <div class="card2023Qixi" @click.stop>
+    <div class="cardQixi" @click.stop>
         <div
             v-if="fontCount"
             :class="['u-count', { active }]"
@@ -14,7 +14,7 @@
 <script>
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
-    name: "card2023Qixi",
+    name: "cardQixi",
     props: ["data"],
     computed: {
         fontCount() {
@@ -44,8 +44,8 @@ export default {
     },
 };
 </script>
-<style lang="less">
-.card2023Qixi {
+<style lang="less" scope>
+.cardQixi {
     .pr;
     .size(420px,596px);
     .auto(x);

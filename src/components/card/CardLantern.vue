@@ -1,5 +1,5 @@
 <template>
-    <div class="card2023Lantern">
+    <div class="cardLantern">
         <div class="u-lanternFestival-card" :class="show ? 'u-card-on' : 'u-card-off'" @click="change">
             <img class="u-card-bg" :src="imgList[0]" alt="元宵节快乐!" />
             <img class="u-card-bg02" :src="imgList[1]" alt="元宵节快乐!" />
@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-    name: "card2023Lantern",
+    name: "cardLantern",
     props: ["data"],
     computed: {
         fontCount() {
@@ -38,8 +38,8 @@ export default {
     },
 };
 </script>
-<style lang="less">
-.card2023Lantern {
+<style lang="less" scope>
+.cardLantern {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -120,7 +120,7 @@ export default {
 }
 
 @media screen and (max-width: @phone) {
-    .card2023Lantern .u-lanternFestival-card {
+    .cardLantern .u-lanternFestival-card {
         zoom: 0.4;
     }
 }

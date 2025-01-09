@@ -37,7 +37,7 @@ export default {
     },
 };
 </script>
-<style lang="less">
+<style lang="less" scope>
 .newYearsDay {
     display: flex;
     align-items: center;

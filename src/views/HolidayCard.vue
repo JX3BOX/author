@@ -19,6 +19,8 @@ import CardChristmas from "@/components/card/CardChristmas.vue";
 import CardQixi from "@/components/card/CardQixi.vue";
 import CardDragonBoat from "@/components/card/CardDragonBoat.vue";
 import CardLantern from "@/components/card/CardLantern.vue";
+import CardAutumn from "@/components/card/CardAutumn.vue";
+import DoubleScreen from "@/components/card/DoubleScreen.vue";
 
 export default {
     name: "holidayCard",
@@ -32,6 +34,8 @@ export default {
         CardQixi,
         CardDragonBoat,
         CardLantern,
+        CardAutumn,
+        DoubleScreen,
     },
     data: function () {
         return {
@@ -88,6 +92,8 @@ export default {
                 qixi: this.qixi_data,
                 dragon: this.dragon_data,
                 lantern: this.newyear_data,
+                autumn: this.newyear_data,
+                double: this.double_data,
             };
             return _data[this.cardType[this.event_id]?.type];
         },
@@ -162,6 +168,15 @@ export default {
             return {
                 countImg: `${this.imgLink}${this.fontCount}.svg`,
                 imgList: this.imgList.map((item) => `${this.imgLink}${item}`),
+            };
+        },
+        double_data() {
+            return {
+                fontCount: this.fontCount,
+                countImg: `${this.imgLink}${this.fontCount}.png`,
+                imgList: this.imgList.map((item) => `${this.imgLink}${item}`),
+                vImg: `${this.imgLink}/v${this.fontCount}.png`,
+                bgImg: `${this.imgLink}bg.png`,
             };
         },
     },
