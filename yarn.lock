@@ -1045,7 +1045,7 @@
     uuid "^9.0.0"
     winston "^3.8.2"
 
-"@jx3box/jx3box-comment-ui@^2.0.1":
+"@jx3box/jx3box-comment-ui@^2.0.1", "@jx3box/jx3box-comment-ui@^2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@jx3box/jx3box-comment-ui/-/jx3box-comment-ui-2.0.2.tgz#f3e3b666d836a8304ace79aff7f9ffc6a257a8e5"
   integrity sha512-Fsvtb2rJq6otO7CXonhLHP59iZVLBQkfpV5jskXw8XB2eNxNVlzBqtaAqnpycxkQ38iPXYS78vJiH/pH3KOqLQ==
@@ -1071,6 +1071,25 @@
     "@jx3box/jx3box-common" "^8.5.4"
     "@jx3box/jx3box-data" "^3.7.5"
     "@jx3box/jx3box-editor" "^2.2.21"
+    "@jx3box/reporter" "^0.0.4"
+    axios "^0.26.1"
+    dayjs "^1.11.0"
+    element-ui "^2.13.2"
+    jquery "^3.5.1"
+    lodash "^4.17.15"
+    qrcode.vue "^1.7.0"
+    url "^0.11.0"
+    vue "^2.6.11"
+
+"@jx3box/jx3box-common-ui@^9.0.28":
+  version "9.0.28"
+  resolved "https://registry.yarnpkg.com/@jx3box/jx3box-common-ui/-/jx3box-common-ui-9.0.28.tgz#e15aaa434f04889fec9d3faeb9060ae1c392e78b"
+  integrity sha512-7xXZ6FHfUzJ8u4MCwFLY2BsVH9Trx6ZqRuDUwG0GFZSrz+1KV3c77n2GpQ3H5hgVOMvhdkvdKsldXSqOnAGOLw==
+  dependencies:
+    "@jx3box/jx3box-comment-ui" "^2.0.2"
+    "@jx3box/jx3box-common" "^8.5.4"
+    "@jx3box/jx3box-data" "^3.7.6"
+    "@jx3box/jx3box-editor" "^2.2.23"
     "@jx3box/reporter" "^0.0.4"
     axios "^0.26.1"
     dayjs "^1.11.0"
@@ -1152,10 +1171,49 @@
   resolved "https://registry.npmjs.org/@jx3box/jx3box-data/-/jx3box-data-3.7.5.tgz"
   integrity sha512-DLiF8KOox9roc9yz1lLxnJVKQ113FdvdpG7yFJe/J+Y+y9wjj5S5qZZ4cLRjdCjy0uUwqPhftfnImOnB6SEsPA==
 
+"@jx3box/jx3box-data@^3.7.6":
+  version "3.7.6"
+  resolved "https://registry.yarnpkg.com/@jx3box/jx3box-data/-/jx3box-data-3.7.6.tgz#5599efcc5fe1170b1bbe6da78b1c4e9bbc26e1ff"
+  integrity sha512-loCr61p5FnCUIE3r5PtZa31xME38ZCxyNsfLbeNdv0zO7t7kKccB3KRKqg69+9o4nU9p78p2Vz6YYzuAlx7P+w==
+
 "@jx3box/jx3box-editor@^2.2.21":
   version "2.2.21"
   resolved "https://registry.yarnpkg.com/@jx3box/jx3box-editor/-/jx3box-editor-2.2.21.tgz#d4848fe1f2b47b2a192560e8a49769d91f291344"
   integrity sha512-Tq5qZzNSw7q4GsWEXJUwCzc1CzUm+KSqp6jBx6nnrGzTovNnIPjJ7LbUUInMElStEtkxE4CgLzI9FQ2iw88psg==
+  dependencies:
+    "@jx3box/jx3box-common" "^8.2.18"
+    "@jx3box/jx3box-data" "^3.5.8"
+    "@jx3box/jx3box-emotion" "^1.2.8"
+    "@jx3box/jx3box-macro" "^1.0.1"
+    "@jx3box/jx3box-talent" "^1.3.1"
+    "@jx3box/markdown" "^0.1.5"
+    "@tinymce/tinymce-vue" "^3.2.2"
+    axios "^0.19.2"
+    core-js "^3.6.5"
+    csslab "^4.0.3"
+    dayjs "^1.10.7"
+    element-ui "^2.13.2"
+    hevue-img-preview "^5.0.0"
+    highlight.js "^11.3.1"
+    jquery "^3.5.1"
+    js-base64 "^3.6.1"
+    katex "^0.13.0"
+    lodash "^4.17.15"
+    photoswipe "^4.1.2"
+    prismjs "^1.20.0"
+    sortablejs "^1.15.0"
+    vue "^2.6.11"
+    vue-contextmenujs "^1.4.9"
+    vue-gallery-slideshow "^1.5.2"
+    vue-photoswipe.js "^2.0.23"
+    vue-plugin-load-script "^1.3.6"
+    vuedraggable "^2.24.3"
+    xss "^1.0.8"
+
+"@jx3box/jx3box-editor@^2.2.23":
+  version "2.2.23"
+  resolved "https://registry.yarnpkg.com/@jx3box/jx3box-editor/-/jx3box-editor-2.2.23.tgz#a1fc1e294743b9006664425d7e387e9c82774394"
+  integrity sha512-/Y6Zr5IM0mGlwvUlzyOlYi7yIn3jm8LrKJYJPoKFaYTxJhdd14iYE1ErpQ1rnpCyWCTfGj2QkP23zdG+FhZ1fQ==
   dependencies:
     "@jx3box/jx3box-common" "^8.2.18"
     "@jx3box/jx3box-data" "^3.5.8"
