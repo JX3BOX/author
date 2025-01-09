@@ -1,104 +1,97 @@
 {
     "1": {
         "name": "2022春节",
-        "currency": "boxcoin",
         "component": "Card2022Spring"
     },
     "2": {
         "name": "2022端午节",
-        "currency": "boxcoin",
         "component": "Card2022DragonBoat"
     },
     "3": {
         "name": "2022七夕",
-        "currency": "boxcoin",
         "component": "Card2022Qixi"
     },
     "4": {
         "name": "2022中秋节",
-        "currency": "boxcoin",
         "component": "Card2022MidAutumn"
     },
     "5": {
         "name": "2022圣诞节",
-        "currency": "boxcoin",
         "component": "Card2022Christmas"
     },
     "6": {
         "name": "2023元旦",
-        "currency": "boxcoin",
-        "component": "Card2023NewYear"
+        "key": "newYearsDay",
+        "type": "newyear",
+        "component": "Card2024NewYear",
+        "imgList": ["P1-BG.jpg", "p2-01.jpg", "ClickButton-1.png", "CloseButton-1.png"]
     },
     "7": {
         "name": "2023春节",
-        "currency": "boxcoin",
-        "component": "Card2023Spring"
+        "year": "2023",
+        "key": "springFestival",
+        "type": "spring",
+        "component": "CardSpring"
     },
     "8": {
         "name": "2023元宵节",
-        "currency": "boxcoin",
-        "component": "Card2023Lantern"
+        "key": "lanternFestival",
+        "type": "lantern",
+        "component": "CardLantern",
+        "imgList": ["BG.png", "Frame01.png", "button.png", "Frame02.png", "debut.png", "Frame03.png"]
     },
     "9": {
         "name": "2023端午节",
-        "currency": "boxcoin",
         "key": "dragonBoatFestival",
         "type": "dragon",
-        "component": "Card2023DragonBoat",
+        "component": "CardDragonBoat",
         "imgList": ["bg.svg", "text.svg", "cover.svg"]
     },
     "10": {
         "name": "2023七夕",
-        "currency": "boxcoin",
-        "component": "Card2023Qixi",
         "key": "qixi",
         "type": "qixi",
+        "component": "CardQixi",
         "imgList": ["text.png", "bg.png", "line.png"]
     },
     "11": {
         "name": "2023中秋节",
-        "currency": "points",
+        "count": true,
         "key": "midAutumn",
         "type": "default",
-        "count": true,
         "component": "DefaultTemplate",
         "imgList": ["202301.png", "202302.jpg"]
     },
     "12": {
         "name": "2023圣诞节",
-        "currency": "points",
-        "type": "christmas",
         "key": "christmas2023",
-        "component": "Card2023Christmas",
+        "type": "christmas",
+        "component": "CardChristmas",
         "imgList": ["cover.jpg", "button.png", "bg.jpg"]
     },
     "28": {
         "name": "2024元旦",
-        "currency": "points",
-        "type": "newyear",
         "key": "newYearsDay2023",
-        "component": "Card2024NewYear",
+        "type": "newyear",
+        "component": "CardNewYear",
         "imgList": ["P1-BG.jpg", "p2-01.jpg", "ClickButton-1.png", "CloseButton-1.png"]
     },
     "29": {
         "name": "2024春节",
         "key": "springFestival2024",
-        "currency": "points",
         "type": "spring",
-        "component": "Card2024Spring"
+        "component": "CardSpring"
     },
     "30": {
         "name": "2024儿童节",
-        "currency": "points",
         "key": "children2024",
         "type": "children",
-        "component": "Card2024Children"
+        "component": "CardChildren"
     },
     "31": {
         "name": "2024中秋",
-        "key": "midAutumn2024",
-        "currency": "points",
         "bg": "202403.png",
+        "key": "midAutumn2024",
         "type": "default",
         "component": "DefaultTemplate",
         "imgList": ["202402.png", "202401.png"]

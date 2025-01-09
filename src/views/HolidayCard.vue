@@ -12,24 +12,26 @@ import cardType from "@/assets/data/card.json";
 import { getHolidayCard } from "@/service/card";
 import AppLayout from "@/layouts/AppLayout.vue";
 import DefaultTemplate from "@/components/card/DefaultTemplate.vue";
-import Card2024Children from "@/components/card/Card2024Children.vue";
-import Card2024Spring from "@/components/card/Card2024Spring.vue";
-import Card2024NewYear from "@/components/card/Card2024NewYear.vue";
-import Card2023Christmas from "@/components/card/Card2023Christmas.vue";
-import Card2023Qixi from "@/components/card/Card2023Qixi.vue";
-import Card2023DragonBoat from "@/components/card/Card2023DragonBoat.vue";
+import CardChildren from "@/components/card/CardChildren.vue";
+import CardSpring from "@/components/card/CardSpring.vue";
+import CardNewYear from "@/components/card/CardNewYear.vue";
+import CardChristmas from "@/components/card/CardChristmas.vue";
+import CardQixi from "@/components/card/CardQixi.vue";
+import CardDragonBoat from "@/components/card/CardDragonBoat.vue";
+import CardLantern from "@/components/card/CardLantern.vue";
 
 export default {
     name: "holidayCard",
     components: {
         AppLayout,
         DefaultTemplate,
-        Card2024Children,
-        Card2024Spring,
-        Card2024NewYear,
-        Card2023Christmas,
-        Card2023Qixi,
-        Card2023DragonBoat,
+        CardChildren,
+        CardSpring,
+        CardNewYear,
+        CardChristmas,
+        CardQixi,
+        CardDragonBoat,
+        CardLantern,
     },
     data: function () {
         return {
@@ -85,6 +87,7 @@ export default {
                 christmas: this.christmas_data,
                 qixi: this.qixi_data,
                 dragon: this.dragon_data,
+                lantern: this.newyear_data,
             };
             return _data[this.cardType[this.event_id]?.type];
         },
@@ -117,11 +120,20 @@ export default {
         },
         // 春节
         spring_data() {
-            return {
+            const hasYear = this.cardType[this.event_id]?.year;
+            const _default = {
                 letter: `${this.imgLink}letter.png`,
                 cover: `${this.imgLink}cover.png`,
                 countImg: `${this.imgLink}${this.fontCount}.png`,
             };
+            const _year = {
+                year: true,
+                bg: `${this.imgLink}BG.jpg`,
+                cover: `${this.imgLink}cover.png`,
+                button: `${this.imgLink}button.png`,
+                countImg: `${this.imgLink}${this.fontCount}.png`,
+            };
+            return hasYear ? _year : _default;
         },
         // 元旦
         newyear_data() {
