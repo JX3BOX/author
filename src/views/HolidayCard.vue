@@ -1,16 +1,16 @@
 <template>
-    <AppLayout>
+    <HeaderLessLayout>
         <div class="m-main m-index-popup">
             <component :is="event_component" :data="component_data" @close="goBack" />
         </div>
-    </AppLayout>
+    </HeaderLessLayout>
 </template>
 
 <script>
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import cardType from "@/assets/data/card.json";
 import { getHolidayCard } from "@/service/card";
-import AppLayout from "@/layouts/AppLayout.vue";
+import HeaderLessLayout from "@/layouts/HeaderLessLayout.vue";
 import DefaultTemplate from "@/components/card/DefaultTemplate.vue";
 import CardChildren from "@/components/card/CardChildren.vue";
 import CardSpring from "@/components/card/CardSpring.vue";
@@ -26,7 +26,7 @@ import OneScreen from "@/components/card/OneScreen.vue";
 export default {
     name: "holidayCard",
     components: {
-        AppLayout,
+        HeaderLessLayout,
         DefaultTemplate,
         CardChildren,
         CardSpring,
@@ -43,6 +43,7 @@ export default {
         return {
             cardType,
             list: [],
+            data: {},
         };
     },
     computed: {
@@ -52,7 +53,7 @@ export default {
         },
         // 打开的卡号id
         my_card_id() {
-            return this.$route.params.id;
+            return this.$route.query.id;
         },
         // 当前活动的信息
         active_event() {
@@ -204,8 +205,8 @@ export default {
             this.$router.push({ name: "index", params: { id: this.user_id } });
         },
         load() {
-            getHolidayCard().then((res) => {
-                this.list = res?.data || [];
+            getHolidayCard({ _no_page: 1 }).then((res) => {
+                this.list = res.data.data?.list || [];
                 const ids = this.list.map((item) => item.id);
                 if (!ids.includes(~~this.my_card_id)) this.goBack();
             });
