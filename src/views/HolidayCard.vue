@@ -56,7 +56,7 @@ export default {
         },
         // 当前活动的信息
         active_event() {
-            return this.list.find((item) => item.id == this.my_card_id);
+            return this.list.length && this.list.find((item) => item.id == this.my_card_id);
         },
         // 当前卡号对应的活动id
         event_id() {
@@ -205,8 +205,8 @@ export default {
         },
         load() {
             getHolidayCard().then((res) => {
-                this.list = res?.data || [];
-                const ids = this.list.map((item) => item.id);
+                this.list = res.data?.data?.list || [];
+                const ids = (this.list.length && this.list.map((item) => item.id)) || [];
                 if (!ids.includes(~~this.my_card_id)) this.goBack();
             });
         },
