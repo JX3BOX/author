@@ -22,6 +22,7 @@ import CardLantern from "@/components/card/CardLantern.vue";
 import CardAutumn from "@/components/card/CardAutumn.vue";
 import DoubleScreen from "@/components/card/DoubleScreen.vue";
 import OneScreen from "@/components/card/OneScreen.vue";
+import User from "@jx3box/jx3box-common/js/user";
 
 export default {
     name: "holidayCard",
@@ -60,7 +61,7 @@ export default {
             return this.list.find((item) => item.id == this.my_card_id);
         },
         // 当前卡号对应的活动id
-        event_id() { 
+        event_id() {
             return this.$route.params.event_id;
         },
         // 活动id对应的活动key
@@ -195,7 +196,7 @@ export default {
     watch: {
         my_card_id: {
             handler: function (id) {
-                id ? this.load() : this.goBack();
+                id && this.load()
             },
             immediate: true,
         },
@@ -205,10 +206,14 @@ export default {
             this.$router.push({ name: "index", params: { id: this.user_id } });
         },
         load() {
+            if (!User.isLogin()) {
+                return
+            }
+            if (User.getInfo().uid != this.user_id) {
+                this.goBack();
+            }
             getHolidayCard({ _no_page: 1 }).then((res) => {
                 this.list = res.data.data?.list || [];
-                const ids = this.list.map((item) => item.id);
-                if (!ids.includes(~~this.my_card_id)) this.goBack();
             });
         },
     },
