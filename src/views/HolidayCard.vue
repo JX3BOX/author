@@ -1,7 +1,7 @@
 <template>
     <HeaderLessLayout>
-        <div class="m-main m-index-popup" v-if="!close">
-            <component :is="event_component" :data="component_data" @close="hide" />
+        <div class="m-main m-index-popup">
+            <component :is="event_component" :data="component_data" @close="close" />
         </div>
     </HeaderLessLayout>
 </template>
@@ -46,8 +46,6 @@ export default {
             cardType,
             list: [],
             data: {},
-
-            close: false,
         };
     },
     computed: {
@@ -206,8 +204,8 @@ export default {
         },
     },
     methods: {
-        hide() {
-            this.close = true;
+        close() {
+            this.goBack();
             window.parent.postMessage("closeHolidayCard", "*");
         },
         goBack() {
