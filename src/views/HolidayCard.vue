@@ -1,7 +1,7 @@
 <template>
     <HeaderLessLayout>
-        <div class="m-main m-index-popup">
-            <component :is="event_component" :data="component_data" @close="goBack" />
+        <div class="m-main m-index-popup" v-if="!close">
+            <component :is="event_component" :data="component_data" @close="hide" />
         </div>
     </HeaderLessLayout>
 </template>
@@ -46,6 +46,8 @@ export default {
             cardType,
             list: [],
             data: {},
+
+            close: false,
         };
     },
     computed: {
@@ -204,6 +206,9 @@ export default {
         },
     },
     methods: {
+        hide() {
+            this.close = true;
+        },
         goBack() {
             this.$router.push({ name: "index", params: { id: this.user_id } });
         },
