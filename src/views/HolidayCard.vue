@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { some } from "lodash";
 import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
 import cardType from "@/assets/data/card.json";
 import { getHolidayCard } from "@/service/card";
@@ -196,7 +197,8 @@ export default {
     watch: {
         my_card_id: {
             handler: function (id) {
-                id && this.load()
+                if (!id) return this.goBack();
+                id && this.load();
             },
             immediate: true,
         },
@@ -206,15 +208,20 @@ export default {
             this.$router.push({ name: "index", params: { id: this.user_id } });
         },
         load() {
-            if (!User.isLogin()) {
-                return
-            }
+            if (!User.isLogin()) return;
             if (User.getInfo().uid != this.user_id) {
                 this.goBack();
             }
             getHolidayCard({ _no_page: 1 }).then((res) => {
                 this.list = res.data.data?.list || [];
+                // 如果用户没有对应的卡号
+                if (!this.checkMatch(this.list)) {
+                    this.goBack();
+                }
             });
+        },
+        checkMatch(list) {
+            return some(list, { id: ~~this.my_card_id, event_id: ~~this.event_id });
         },
     },
 };
@@ -226,4 +233,9 @@ export default {
     background-color: #24292e;
 }
 @import "~@/assets/css/pop.less";
+</style>
+<style lang="less" scoped>
+body {
+    background-color: transparent;
+}
 </style>
