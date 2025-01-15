@@ -234,8 +234,3 @@ export default {
 }
 @import "~@/assets/css/pop.less";
 </style>
-<style lang="less" scoped>
-body {
-    background-color: transparent;
-}
-</style>
