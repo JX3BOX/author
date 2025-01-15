@@ -208,6 +208,7 @@ export default {
     methods: {
         hide() {
             this.close = true;
+            window.parent.postMessage("closeHolidayCard", "*");
         },
         goBack() {
             this.$router.push({ name: "index", params: { id: this.user_id } });
