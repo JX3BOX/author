@@ -91,3 +91,11 @@ export default {
 <style scoped lang="less">
 @import "../../assets/css/newCss/primary.less";
 </style>
+<style lang="less">
+.m-fans {
+    .f-avatar {
+        .h(auto) !important;
+        flex-wrap: wrap;
+    }
+}
+</style>
