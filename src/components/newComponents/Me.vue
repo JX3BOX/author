@@ -70,7 +70,7 @@
             <div class="m-author-primary">
                 <div class="m-right">
                     <!-- 关注 -->
-                    <div class="m-focus" v-if="!isSelf">
+                    <div class="m-focus" v-if="!isSelf && isLogin">
                         <div class="u-btn-box">
                             <el-button
                                 icon="el-icon-plus"
@@ -151,7 +151,7 @@
             </div>
             <div class="m-right">
                 <!-- 关注 -->
-                <div class="m-focus u-in-phone" v-if="!isSelf">
+                <div class="m-focus u-in-phone" v-if="!isSelf && isLogin">
                     <div v-if="!hadDeny" class="u-btn-box">
                         <el-button
                             icon="el-icon-plus"
