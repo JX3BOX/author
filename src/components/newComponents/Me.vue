@@ -267,7 +267,7 @@ export default {
         display_name: {
             immediate: true,
             handler(display_name) {
-                if (display_name) {
+                if (display_name && this.isLogin) {
                     hadDenyUser(display_name).then((res) => {
                         const list = res.data?.data?.list || [];
                         this.hadDeny = !!list.length;
