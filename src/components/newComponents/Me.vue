@@ -296,7 +296,7 @@ export default {
                 userName: {},
                 honor: {},
                 sendMsg: {},
-                banner: `${__cdn}design/decoration/images/0_TESTSAMPLE/homebanner.png`,
+                banner: `${__cdn}design/decoration/images/0_TESTSAMPLE/homebanner.png?${new Date().getTime()}`,
             },
             // honor: null, //称号
             canSendLetter: false,
