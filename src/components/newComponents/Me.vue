@@ -32,38 +32,9 @@
                         </el-tooltip>
                     </div>
 
-                    <!-- <div class="u-honor" :style="{ backgroundImage: `url(${imgUrl()})` }" v-if="honor">
-                        <span :style="{ color: honor.color }">{{ honor.honor }}</span>
-                    </div> -->
                     <Honor :uid="uid"></Honor>
                 </div>
-                <!-- <div class="u-info" :title="authorInfo.user_bio||'这个人太懒了~没有写签名。'">
-                    {{ authorInfo.user_bio||'这个人太懒了~没有写签名。' }}
-                </div> -->
             </div>
-            <!-- <div class="m-focus" v-if="!isSelf">
-                <div class="m-btn-box">
-                    <el-button icon="el-icon-plus" class="m-btn u-btn-attention" v-if="!isFollow" @click="follow" size="mini">关注TA</el-button>
-                    <div class="m-btn u-already-attention" v-else >
-                        <el-button class="u-btn" size="mini" @mouseenter.native="attentionText='取消关注'" @mouseleave.native="attentionText='已关注'" @click="unfollow">{{ attentionText }}</el-button>
-                        <el-button class="u-btn u-btn-disabled" size="mini"  :disabled="true">发消息</el-button>
-                    </div>
-                </div>
-                <div class="u-more">
-                    <el-popover
-                        placement="bottom-end"
-                        trigger="click"
-                        width="90"
-                        v-model="moreOperate"
-                    >
-                        <a href="/feedback" target="_blank">
-                            <el-button size="mini" class="u-more-btn">举报</el-button>
-                        </a><br>
-                        <el-button size="mini" class="u-more-btn" @click="joinBlacklist">拉黑</el-button>
-                        <img src="@/assets/img/more.svg" svg-inline  slot="reference" class="u-more-img"/>
-                    </el-popover>
-                </div>
-            </div> -->
         </div>
         <!-- 手机端显示此加入时间，隐藏原有 -->
         <div class="m-join-phone">
@@ -75,7 +46,7 @@
                             <el-button
                                 icon="el-icon-plus"
                                 class="u-btn-attention"
-                                v-if="!isFollow"
+                                v-if="!subscribed"
                                 @click="follow"
                                 size="mini"
                                 :style="userDefinedStyle.btn"
@@ -130,14 +101,6 @@
                             :style="userDefinedStyle.fans"
                             v-if="diffYearText"
                         >
-                            <!-- <i class="u-icon u-icon-fans">
-                                <img
-                                    svg-inline
-                                    src="../../assets/img/fans.svg"
-                                    class="u-svg"
-                                    :style="userDefinedStyle.fans"
-                                /> </i
-                            >粉丝数 <b>{{ fansNum }}</b> -->
                             <el-tag type="primary" size="small">{{ diffYearText }}</el-tag>
                         </div>
                     </div>
@@ -156,12 +119,12 @@
                         <el-button
                             icon="el-icon-plus"
                             class="u-btn-attention"
-                            v-if="!isFollow"
+                            v-if="!subscribed"
                             @click="follow"
                             size="mini"
-                            :style="userDefinedStyle.btn"
                             >关注TA</el-button
-                        >
+                            >
+                            <!-- :style="userDefinedStyle.btn" -->
                         <div class="u-already-attention" v-else>
                             <el-button
                                 class="u-btn"
@@ -209,14 +172,6 @@
                         <span>加入于 {{ data.user_registered | time }}</span>
                     </div>
                     <div v-if="diffYearText" class="u-fans" :class="isSelf ? 'self' : ''" :style="userDefinedStyle.fans">
-                        <!-- <i class="u-icon u-icon-fans">
-                            <img
-                                svg-inline
-                                src="../../assets/img/fans.svg"
-                                class="u-svg"
-                                :style="userDefinedStyle.fans"
-                            /> </i
-                        >粉丝数 <b>{{ fansNum }}</b> -->
                         <el-tag type="primary" size="small">{{ diffYearText }}</el-tag>
                     </div>
                 </div>
@@ -229,6 +184,7 @@
 
 <script>
 import { follow, unfollow } from "@jx3box/jx3box-common-ui/service/follow";
+import { getAuthorRss, subscribeAuthor, unsubscribeAuthor } from "@jx3box/jx3box-common/js/rss";
 import { __userLevelColor, __imgPath, __cdn } from "@jx3box/jx3box-common/data/jx3box";
 import { user as medal_map } from "@jx3box/jx3box-common/data/medals.json";
 import frames from "@jx3box/jx3box-common/data/user_avatar_frame.json";
@@ -282,11 +238,9 @@ export default {
             medal_map,
             frames,
             isVIP: false,
-            isFollow: false,
             attentionText: "已关注",
             moreOperate: false,
             moreOperatePhone: false,
-            fansNum: 0,
             authorInfo: {},
             avatarSize: "l",
             fansLink: "/dashboard/privacy?tab=myfans",
@@ -302,6 +256,10 @@ export default {
             canSendLetter: false,
             //是否拉黑
             hadDeny: false,
+
+            // 关注
+            subscribed: false,
+            fansNum: 0,
         };
     },
     computed: {
@@ -441,11 +399,10 @@ export default {
             if (!this.uid) {
                 return;
             }
-            follow(this.uid)
+            subscribeAuthor({ id: this.uid, data: { title: this.display_name } })
                 .then((res) => {
+                    this.subscribed = true;
                     this.$message.success("关注成功");
-                    this.isFollow = true;
-                    this.loadFans();
                 })
                 .catch((err) => {
                     console.log(err);
@@ -459,15 +416,14 @@ export default {
                 type: "warning",
             })
                 .then(() => {
-                    unfollow(this.uid)
-                        .then((res) => {
-                            this.$message.success("取关成功");
-                            this.isFollow = false;
-                            this.loadFans();
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        });
+                    unsubscribeAuthor({ id: this.uid })
+                    .then((res) => {
+                        this.$message.success("操作成功");
+                        this.subscribed = false;
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
                 })
                 .catch((_) => {});
         },
@@ -486,10 +442,17 @@ export default {
             if (!this.uid) {
                 return;
             }
-            getFansCount(this.uid).then((res) => {
-                this.fansNum = res.data.data.follower_count || 0;
-                this.isFollow = res.data.data.is_followed;
-            });
+            getAuthorRss({ id: this.uid })
+                .then((res) => {
+                    this.fansNum = res.data.data.total || 0;
+                    this.subscribed = res.data.data.subscribed;
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    this.loading = false;
+                });
         },
         getAuthorInfo(v) {
             this.authorInfo = v;
