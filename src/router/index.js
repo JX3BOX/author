@@ -9,6 +9,7 @@ const routes = [
     { path: "/:uid(\\d+)/certificate/:id(\\d+)", name: "certificate", component: () => import("@/views/certificate.vue") },
     { path: "/:uid(\\d+)/groupCertificate/:id(\\d+)", name: "groupCertificate", component: () => import("@/views/groupCertificate.vue") },
     { path: "/:uid(\\d+)/holiday-card/:event_id(\\d+)", name: "holidayCard", component: () => import("@/views/HolidayCard.vue") },
+    { path: "/:uid(\\d+)/birthday-card/:skin(\\w+)?", name: "birthdayCard", component: () => import("@/views/BirthdayCard.vue") },
 ];
 
 const router = new VueRouter({
