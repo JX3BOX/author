@@ -69,7 +69,7 @@ export default {
                 this.userdata = res.data.data;
             });
             getBirthdayDetail(this.id).then(res => {
-                this.zip = dayjs(res.data.data.created_at).format("YYMMDD")
+                this.zip = dayjs(res.data.data.birthday).format("YYMMDD")
                 this.age = res.data.data.age
             })
         },
