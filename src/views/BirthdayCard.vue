@@ -11,11 +11,14 @@ import HeaderLessLayout from "@/layouts/HeaderLessLayout.vue";
 
 // 2025贺卡
 import Default2025 from "@/components/birthday/default2025.vue";
+// 2024贺卡
+import Default2024 from "@/components/birthday/default2024.vue";
 export default {
     name: "BirthdayCard",
     components: {
         HeaderLessLayout,
         Default2025,
+        Default2024,
     },
     data: function () {
         return {
