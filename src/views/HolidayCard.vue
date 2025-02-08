@@ -8,7 +8,7 @@
 
 <script>
 import { some } from "lodash";
-import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 import cardType from "@/assets/data/card.json";
 import { getHolidayCard } from "@/service/card";
 import HeaderLessLayout from "@/layouts/HeaderLessLayout.vue";
@@ -45,7 +45,7 @@ export default {
         return {
             cardType,
             list: [],
-            data: {},
+            data: {}, 
         };
     },
     computed: {
@@ -71,7 +71,7 @@ export default {
         },
         // 活动对应的图片地址
         imgLink() {
-            return __imgPath + `topic/festival/${this.event_key}/`;
+            return __cdn + `design/card/festival/${this.event_key}/`;
         },
         // 活动对应的图片列表
         imgList() {
@@ -188,7 +188,7 @@ export default {
             const text = this.cardType[this.event_id]?.text;
             const data = {
                 fontCount: this.fontCount,
-                imgLink: __imgPath + `topic/festival/${key}.png`,
+                imgLink: __cdn + `design/card/festival/${key}.png`,
             };
             if (text) data.text = text;
             return data;
