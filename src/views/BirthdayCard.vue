@@ -1,40 +1,32 @@
 <template>
-    <HeaderLessLayout>
-        <div class="m-main m-index-popup">
-            <component :is="event_component" />
-        </div>
-    </HeaderLessLayout>
+    <div class="m-main m-index-popup">
+        <component :is="event_component" />
+    </div>
 </template>
 
 <script>
-import HeaderLessLayout from "@/layouts/HeaderLessLayout.vue";
-
 // 2025贺卡
 import Default2025 from "@/components/birthday/default2025.vue";
 // 2024贺卡
-import Default2024 from "@/components/birthday/default2024.vue";
+import Default from "@/components/birthday/default.vue";
 export default {
     name: "BirthdayCard",
     components: {
-        HeaderLessLayout,
         Default2025,
-        Default2024,
+        Default,
     },
     data: function () {
         return {
-            event_component: "default2025",
+            event_component: Default,
         };
-    },
-    methods: {
     },
     mounted() {
         const skin = this.$route.params.skin;
-
-        this.event_component = skin == 'undefined' ? 'default2025' : skin
+        const data = {
+            default2025: Default2025,
+            default: Default,
+        };
+        this.event_component = data[skin] || Default;
     },
 };
 </script>
-
-<style lang="less">
-
-</style>

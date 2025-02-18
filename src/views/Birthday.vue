@@ -14,7 +14,7 @@
             </div>
             <div class="m-letter">
                 <div class="u-head">
-                    <div class="u-zip">{{zip}}</div>
+                    <div class="u-zip">{{ zip }}</div>
                     <div class="u-atv">
                         <img class="i-atv" :src="avatar" />
                         <span class="i-stamp"></span>
@@ -25,10 +25,11 @@
                     <img class="u-light" src="../assets/img/birthday/light.png" alt />
                     <div class="u-title">
                         祝
-                        <b>{{name}}</b>侠士
+                        <b>{{ name }}</b
+                        >侠士
                     </div>
                     <div class="u-age">
-                        <span>{{age}}</span>
+                        <span>{{ age }}</span>
                     </div>
                 </div>
             </div>
@@ -56,7 +57,7 @@ export default {
     },
     computed: {
         uid: function () {
-            return User.isLogin() ? User.getInfo()?.uid : 0
+            return User.isLogin() ? User.getInfo()?.uid : 0;
         },
         params: function () {
             return new URLSearchParams(location.search);
@@ -82,17 +83,13 @@ export default {
             });
         },
     },
-    mounted: function () { },
+    mounted: function () {},
     created: function () {
         if (!isNaN(this.uid) && this.uid)
             this.loadData().then(() => {
                 this.buildCard();
             });
     },
-    components: { AppLayout }
+    components: { AppLayout },
 };
 </script>
-
-<style lang="less">
-@import "~@/assets/css/birthday.less";
-</style>

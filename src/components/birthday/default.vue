@@ -1,7 +1,7 @@
 <template>
     <div class="m-birthday" v-if="userdata">
         <div class="m-birthday-video">
-            <video class="u-video" src="@/assets/img/birthday/birthbg.mp4" type="video/mp4" autoplay loop muted></video>
+            <video class="u-video" :src="`${imgPath}birthbg.mp4`" type="video/mp4" autoplay loop muted></video>
             <i class="u-mask"></i>
         </div>
         <div class="m-letter">
@@ -13,8 +13,8 @@
                 </div>
             </div>
             <div class="u-cont">
-                <img class="u-circle" src="@/assets/img/birthday/bg.png" alt />
-                <img class="u-light" src="@/assets/img/birthday/light.png" alt />
+                <img class="u-circle" :src="`${imgPath}bg.png`" alt />
+                <img class="u-light" :src="`${imgPath}light.png`" alt />
                 <div class="u-title">
                     祝
                     <b>{{ name }}</b
@@ -33,7 +33,8 @@ import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import dayjs from "dayjs";
 import { getUserInfo } from "@/service/cms.js";
 import User from "@jx3box/jx3box-common/js/user";
-import {getBirthdayDetail} from "@/service/birthday";
+import { getBirthdayDetail } from "@/service/birthday";
+import { __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "Birthday",
     props: [],
@@ -42,6 +43,7 @@ export default {
             zip: "190929",
             age: 2,
             userdata: "",
+            imgPath: __cdn + "design/card/birthday/default/",
         };
     },
     computed: {
@@ -54,32 +56,32 @@ export default {
         id: function () {
             return this.$route.query.id;
         },
-        uid: function() {
-            return this.$route.params.uid
+        uid: function () {
+            return this.$route.params.uid;
         },
-        isMine: function() {
+        isMine: function () {
             return this.uid == User.getInfo().uid;
-        }
+        },
     },
     methods: {
         loadData: async function () {
             if (!this.uid) return;
-            if (!this.isMine) return
+            if (!this.isMine) return;
             getUserInfo(this.uid).then((res) => {
                 this.userdata = res.data.data;
             });
-            getBirthdayDetail(this.id).then(res => {
-                this.zip = dayjs(res.data.data.birthday).format("YYMMDD")
-                this.age = res.data.data.age
-            })
+            getBirthdayDetail(this.id).then((res) => {
+                this.zip = dayjs(res.data.data.birthday).format("YYMMDD");
+                this.age = res.data.data.age;
+            });
         },
     },
     mounted: function () {
-        this.loadData()
+        this.loadData();
     },
 };
 </script>
 
-<style lang="less">
+<style lang="less" scope>
 @import "~@/assets/css/birthday.less";
 </style>
