@@ -24,7 +24,7 @@ body,
         .lt(50%,50%);
         .size(840px,480px);
         .clip;
-        margin: -240px 0 0 -420px;
+        margin: -350px 0 0 -420px;
         // 打开信封
         &.open {
             overflow: visible;
@@ -86,11 +86,14 @@ body,
                 transform: perspective(2000px) translate3d(0px, 30px, -100px);
                 animation: girlMove 0.5s forwards;
             }
+            .m-content {
+                transform: perspective(2000px) rotateY(20deg);
+            }
         }
         // 文字
         .u-txt {
             cursor: default;
-            .rt(-320px,-120px);
+            .rt(-320px,-80px);
             .size(358px,268px);
         }
         // 星星

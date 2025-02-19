@@ -84,10 +84,10 @@ export default {
         transformStyle() {
             if (this.isMouseOver)
                 return {
-                    transform: `perspective(2000px) translate3d(${this.mouseX}px,${this.mouseY}px, 0px) rotateY(${this.mouseX}deg) rotateX(${this.mouseY}deg)`,
+                    transform: `perspective(2000px) translate3d(${this.mouseY}px,${this.mouseX}px, 0px) rotateY(${this.mouseX}deg) rotateX(${this.mouseY}deg)`,
                 };
             return {
-                transform: `perspective(2000px) translate(${this.mouseX}px,${this.mouseY}px, 0px) rotateY(${this.mouseY}deg) rotateX(${this.mouseX}deg)`,
+                transform: `perspective(2000px) translate(${this.mouseY}px,${this.mouseX}px, 0px) rotateY(${this.mouseX}deg) rotateX(${this.mouseY}deg)`,
             };
         },
     },
@@ -119,8 +119,10 @@ export default {
         },
         handleMouseMove(event) {
             if (this.clickCount < 2) return;
-            this.mouseX = event.clientX / 100;
-            this.mouseY = event.clientY / 100;
+            const mouseX = event.clientX / 200;
+            const mouseY = event.clientY / 100;
+            this.mouseX = mouseX ;
+            this.mouseY = mouseY ;
             this.isMouseOver = true;
         },
         handleMouseLeave() {
