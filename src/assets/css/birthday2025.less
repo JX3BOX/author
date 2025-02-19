@@ -4,6 +4,9 @@
     -moz-osx-font-smoothing: grayscale;
     overflow: hidden;
 }
+body {
+    background-color: #0a040f;
+}
 html,
 body,
 #app,
@@ -11,9 +14,14 @@ body,
 .p-birthday {
     .full;
 }
+.m-main {
+    .pr;
+    // overflow: auto;
+    min-width: 1200px;
+    min-height: 960px;
+}
 .p-birthday {
     .pr;
-    .clip;
     background-color: #0a040f;
     .u-video {
         .full;
@@ -23,11 +31,9 @@ body,
         .pointer;
         .lt(50%,50%);
         .size(840px,480px);
-        .clip;
-        margin: -350px 0 0 -420px;
+        margin: -280px 0 0 -420px;
         // 打开信封
         &.open {
-            overflow: visible;
             height: 520px;
             transition: 0.5s all;
             .u-pack-top-out {
@@ -43,6 +49,9 @@ body,
             .m-paper,
             .u-img.u-girl {
                 .db;
+            }
+            .u-hi {
+                .none;
             }
         }
         // 点击散开
@@ -93,7 +102,7 @@ body,
         // 文字
         .u-txt {
             cursor: default;
-            .rt(-320px,-80px);
+            .rt(-320px,-60px);
             .size(358px,268px);
         }
         // 星星
@@ -197,6 +206,11 @@ body,
             &.u-pack-top-in {
                 .none;
             }
+            &.u-hi {
+                .lb(50%,-100px);
+                .size(310px,auto);
+                margin: 0 0 0 -155px;
+            }
         }
     }
     .m-content {
@@ -206,7 +220,11 @@ body,
         transition: transform 0.1s ease-out;
     }
 }
-
+@media screen and (max-width: @ipad) {
+    .m-main {
+        min-width: 100%;
+    }
+}
 @keyframes scaleFade {
     0% {
         transform: scale(1);

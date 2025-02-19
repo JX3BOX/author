@@ -28,6 +28,8 @@
                 <img :src="`${imgPath}paint.png`" class="u-pack-paint" />
                 <img :src="`${imgPath}ok.png`" class="u-pack-ok" />
             </div>
+            <!-- hi -->
+            <img :src="`${imgPath}hi.png`" class="u-img u-hi" />
         </div>
     </div>
 </template>
@@ -121,8 +123,8 @@ export default {
             if (this.clickCount < 2) return;
             const mouseX = event.clientX / 200;
             const mouseY = event.clientY / 100;
-            this.mouseX = mouseX ;
-            this.mouseY = mouseY ;
+            this.mouseX = mouseX;
+            this.mouseY = mouseY;
             this.isMouseOver = true;
         },
         handleMouseLeave() {
