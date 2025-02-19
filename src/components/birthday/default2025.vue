@@ -103,6 +103,7 @@ export default {
             if (!this.isMine) return;
             getBirthdayDetail(this.id).then((res) => {
                 this.data = res.data.data;
+                // this.getStar();
             });
         },
         openLetter() {
@@ -125,6 +126,38 @@ export default {
         handleMouseLeave() {
             if (this.clickCount < 2) return;
             this.isMouseOver = false;
+        },
+        getStar() { 
+            const date = new Date(this.data.birthday);
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) {
+                this.star = "BY";
+            } else if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) {
+                this.star = "JN";
+            } else if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) {
+                this.star = "SZ";
+            } else if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) {
+                this.star = "JX";
+            } else if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) {
+                this.star = "LEO";
+            } else if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) {
+                this.star = "CN";
+            } else if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) {
+                this.star = "TC";
+            } else if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) {
+                this.star = "TX";
+            } else if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) {
+                this.star = "SS";
+            } else if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) {
+                this.star = "MJ";
+            } else if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) {
+                this.star = "SP";
+            } else if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) {
+                this.star = "SY";
+            } else {
+                this.star = "SY";
+            }
         },
     },
 };
