@@ -127,37 +127,37 @@ export default {
             if (this.clickCount < 2) return;
             this.isMouseOver = false;
         },
-        getStar() { 
+        getStar() {
             const date = new Date(this.data.birthday);
             const month = date.getMonth() + 1;
             const day = date.getDate();
-            if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) {
-                this.star = "BY";
-            } else if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) {
-                this.star = "JN";
-            } else if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) {
-                this.star = "SZ";
-            } else if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) {
-                this.star = "JX";
-            } else if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) {
-                this.star = "LEO";
-            } else if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) {
-                this.star = "CN";
-            } else if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) {
-                this.star = "TC";
-            } else if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) {
-                this.star = "TX";
-            } else if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) {
-                this.star = "SS";
-            } else if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) {
-                this.star = "MJ";
-            } else if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) {
-                this.star = "SP";
-            } else if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) {
-                this.star = "SY";
-            } else {
-                this.star = "SY";
+            const STAR = [
+                { sign: "BY", start: { month: 3, day: 21 }, end: { month: 4, day: 19 } },
+                { sign: "JN", start: { month: 4, day: 20 }, end: { month: 5, day: 20 } },
+                { sign: "SZ", start: { month: 5, day: 21 }, end: { month: 6, day: 20 } },
+                { sign: "JX", start: { month: 6, day: 21 }, end: { month: 7, day: 22 } },
+                { sign: "LEO", start: { month: 7, day: 23 }, end: { month: 8, day: 22 } },
+                { sign: "CN", start: { month: 8, day: 23 }, end: { month: 9, day: 22 } },
+                { sign: "TC", start: { month: 9, day: 23 }, end: { month: 10, day: 22 } },
+                { sign: "TX", start: { month: 10, day: 23 }, end: { month: 11, day: 21 } },
+                { sign: "SS", start: { month: 11, day: 22 }, end: { month: 12, day: 21 } },
+                { sign: "MJ", start: { month: 12, day: 22 }, end: { month: 1, day: 19 } },
+                { sign: "SP", start: { month: 1, day: 20 }, end: { month: 2, day: 18 } },
+                { sign: "SY", start: { month: 2, day: 19 }, end: { month: 3, day: 20 } },
+            ];
+            for (const { sign, start, end } of STAR) {
+                if (
+                    (month === start.month && day >= start.day) ||
+                    (month === end.month && day <= end.day) ||
+                    (month > start.month && month < end.month) ||
+                    (month === end.month && day <= end.day) ||
+                    (month === start.month && day >= start.day && end.month === start.month)
+                ) {
+                    this.star = sign;
+                    return;
+                }
             }
+            this.star = "SY";
         },
     },
 };
