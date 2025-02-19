@@ -19,9 +19,11 @@ body,
         .pointer;
         .lt(50%,50%);
         .size(840px,480px);
+        .clip;
         margin: -240px 0 0 -420px;
-
+        // 打开信封
         &.open {
+            overflow: visible;
             height: 520px;
             transition: 0.5s all;
             .u-pack-top-out {
@@ -35,20 +37,82 @@ body,
                 animation: flipUp 0.5s ease-in-out forwards;
             }
         }
+        // 点击散开
+        &.diffuse {
+            .u-paint {
+                .none;
+            }
+            .u-ground {
+                .db;
+                animation: slideIn 0.5s forwards;
+            }
+            .u-pack-top-in,
+            .u-pack-out,
+            .u-pack-in {
+                animation: scaleFade 0.5s forwards;
+            }
+            .u-txt,
+            .u-cake,
+            .u-icon,
+            .u-star {
+                .db;
+            }
+            .u-girl,
+            .m-paper,
+            .u-icon,
+            .u-cake {
+                .z(2);
+            }
+            .u-cake {
+                transform: perspective(2000px) translate3d(15px, 15px, 100px);
+                animation: cakeMove 0.5s forwards;
+            }
+            .u-icon {
+                animation: iconMove 0.5s forwards;
+            }
+            .m-paper {
+                transform: perspective(2000px) translate3d(10px, 0px, -90px);
+                animation: cardMove 0.5s forwards;
+            }
+            .u-girl {
+                transform: perspective(2000px) translate3d(0px, 30px, -100px);
+                animation: girlMove 0.5s forwards;
+            }
+        }
+        // 文字
         .u-txt {
-            .none;
             cursor: default;
             .rt(-388px,-160px);
             .size(358px,268px);
         }
+        // 星星
         .u-star {
-            .none;
             .size(600px);
+            .lb(-60%,-30%);
         }
+        // 星座
         .u-icon {
             .size(60px);
-            bottom: 0;
+            .lb(50%,30%);
         }
+        // 蛋糕
+        .u-cake {
+            .size(220px,185px);
+        }
+        .u-txt,
+        .u-cake,
+        .u-icon,
+        .u-star {
+            .none;
+        }
+        // 地面
+        .u-ground {
+            .none;
+            .z(0);
+            transform: rotateX(80deg);
+            transform-origin: center center;
+        }
+        // 漆封
         .u-paint {
             .pa;
             .size(224px,254px);
@@ -72,6 +136,7 @@ body,
                 }
             }
         }
+        // 信封
         .m-paper {
             .pa;
             .rt(40px,20px);
@@ -121,6 +186,12 @@ body,
             }
         }
     }
+    .m-content {
+        .full;
+        transform-style: preserve-3d;
+        transform: perspective(2000px);
+        transition: transform 0.1s ease-out;
+    }
 }
 
 @keyframes scaleFade {
@@ -156,5 +227,56 @@ body,
     100% {
         transform: rotateX(180deg);
         opacity: 0;
+    }
+}
+@keyframes slideIn {
+    0% {
+        bottom: -200%;
+    }
+    100% {
+        bottom: -170px;
+    }
+}
+
+@keyframes cakeMove {
+    0% {
+        bottom: 30%;
+        left: 50%;
+    }
+    100% {
+        bottom: 60px;
+        left: calc(100% - 220px);
+    }
+}
+@keyframes iconMove {
+    0% {
+        bottom: 30%;
+        left: 50%;
+    }
+    100% {
+        bottom: 70px;
+        transform: perspective(2000px) translate3d(30px, 20px, 70px) skewY(-16deg) rotateY(12deg) rotateX(12deg)
+            scaleX(0.8);
+        left: calc(30% - 80px);
+    }
+}
+@keyframes cardMove {
+    0% {
+        right: 40px;
+        top: 20px;
+    }
+    100% {
+        top: 30%;
+        right: 10%;
+    }
+}
+@keyframes girlMove {
+    0% {
+        left: 20px;
+        top: 0px;
+    }
+    100% {
+        left: 0;
+        top: 30px;
     }
 }
