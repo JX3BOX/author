@@ -1,10 +1,13 @@
 <template>
-    <div class="m-main m-index-popup">
-        <component :is="event_component" />
-    </div>
+    <AppLayout>
+        <div class="m-main m-index-popup">
+            <component :is="event_component" />
+        </div>
+    </AppLayout>
 </template>
 
 <script>
+import AppLayout from "@/layouts/AppLayout.vue";
 // 2025贺卡
 import Default2025 from "@/components/birthday/default2025.vue";
 // 2024贺卡
@@ -14,6 +17,7 @@ export default {
     components: {
         Default2025,
         Default,
+        AppLayout,
     },
     data: function () {
         return {
