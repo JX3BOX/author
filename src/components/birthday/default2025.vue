@@ -106,10 +106,14 @@ export default {
         },
         loadData() {
             if (!this.isMine) return this.goBack();
-            getBirthdayDetail(this.id).then((res) => {
-                this.data = res.data.data;
-                // this.getStar();
-            });
+            getBirthdayDetail(this.id)
+                .then((res) => {
+                    this.data = res.data.data;
+                    // this.getStar();
+                })
+                .catch(() => {
+                    this.goBack();
+                });
         },
         openLetter() {
             this.clickCount++;
