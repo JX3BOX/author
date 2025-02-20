@@ -11,7 +11,7 @@ import AppLayout from "@/layouts/AppLayout.vue";
 // 2025贺卡
 import Default2025 from "@/components/birthday/default2025.vue";
 // 2024贺卡
-import Default from "@/components/birthday/default.vue";
+import Default from "@/components/birthday/default.vue"; 
 export default {
     name: "BirthdayCard",
     components: {

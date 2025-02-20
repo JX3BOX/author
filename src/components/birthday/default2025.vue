@@ -58,6 +58,9 @@ export default {
         };
     },
     computed: {
+        isLogin() {
+            return User.isLogin();
+        },
         user() {
             return User.getInfo();
         },
@@ -65,7 +68,7 @@ export default {
             return this.$route.query.id;
         },
         uid: function () {
-            return this.$route.params.uid;
+            return this.$route.params.uid || 0;
         },
         isMine: function () {
             return this.uid == this.user.uid;
@@ -95,7 +98,11 @@ export default {
     },
 
     mounted() {
-        this.loadData();
+        if (this.isLogin) {
+            this.loadData();
+        } else {
+            this.$router.push({ name: "index", params: { id: this.uid } });
+        }
     },
     methods: {
         dateFormat: function (val) {
