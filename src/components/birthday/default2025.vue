@@ -98,18 +98,14 @@ export default {
     },
 
     mounted() {
-        if (this.isLogin) {
-            this.loadData();
-        } else {
-            this.$router.push({ name: "index", params: { id: this.uid } });
-        }
+        this.isLogin ? this.loadData() : this.goBack();
     },
     methods: {
         dateFormat: function (val) {
             return dayjs(val).format("YYYY年MM月DD日");
         },
         loadData() {
-            if (!this.isMine) return;
+            if (!this.isMine) return this.goBack();
             getBirthdayDetail(this.id).then((res) => {
                 this.data = res.data.data;
                 // this.getStar();
@@ -137,6 +133,9 @@ export default {
         handleMouseLeave() {
             if (this.clickCount < 2) return;
             this.isMouseOver = false;
+        },
+        goBack() {
+            this.$router.push({ name: "index", params: { id: this.uid } });
         },
         getStar() {
             const date = new Date(this.data.birthday);
