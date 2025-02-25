@@ -109,7 +109,7 @@ export default {
             getBirthdayDetail(this.id)
                 .then((res) => {
                     this.data = res.data.data;
-                    // this.getStar();
+                    this.getStar();
                 })
                 .catch(() => {
                     this.goBack();
